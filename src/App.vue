@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <HeaderShortcuts />
+    <HeaderComponent />
+    <router-view />
+    <GoogleMap />
+    <FooterMain />
   </div>
 </template>
 
@@ -13,20 +13,36 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.section {
+  padding: 2.5rem 0;
+}
+.form-label {
+  margin: 0 !important;
 }
 </style>
+<script setup>
+import HeaderComponent from "@/views/user/components/HeaderComponent.vue";
+import HeaderShortcuts from "@/views/user/components/HeaderShortcuts.vue";
+import FooterMain from "@/views/user/components/FooterMain.vue";
+import GoogleMap from "@/views/user/components/GoogleMap.vue";
+</script>
+<script>
+export default {
+  data() {
+    return {};
+  },
+  mounted() {
+    this.$store.commit("setIsMobile", window.innerWidth < 768);
+    window.addEventListener("resize", this.onResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+  },
+  methods: {
+    onResize() {
+      this.$store.commit("setIsMobile", window.innerWidth < 768);
+    },
+  },
+};
+</script>
