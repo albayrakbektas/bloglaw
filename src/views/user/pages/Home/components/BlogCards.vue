@@ -7,7 +7,7 @@
       </div>
       <div class="row">
         <div
-          v-for="(blog, index) in blogs"
+          v-for="(blog, index) in data"
           :key="index"
           class="col-12 col-md-4"
         >
@@ -19,22 +19,35 @@
 </template>
 
 <script>
-import { getBlogs } from "@/services/blog";
 import BlogCard from "@/views/user/pages/Home/components/BlogCard.vue";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "BlogCards",
   components: { BlogCard },
+  computed: {
+    ...mapGetters("BlogsIndex", ["data", "loading"]),
+  },
   created() {
-    getBlogs().then((res) => {
-      this.blogs = res;
-    });
+    // this.blogs = this.fetchIndexData()
   },
   data() {
     return {
       blogs: null,
     };
   },
+  watch: {
+    query: {
+      handler() {
+        this.fetchIndexData();
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
+  methods: {
+    ...mapActions("BlogsIndex", ["fetchIndexData"])
+  }
 };
 </script>
 

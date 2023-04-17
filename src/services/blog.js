@@ -1,11 +1,16 @@
+import store from "@/store"; // Import the Vuex store instance
+
 import { ref, deleteObject } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { onValue, ref as dbRef, set, remove } from "firebase/database";
 import { db, storage } from "@/services/firebase";
 import axios from "axios";
+import router from "@/router";
 
 export async function submit(blog) {
+  await store.dispatch("setLoading", true);
   const formData = new FormData();
+  formData.append("id", blog.id);
   formData.append("title", blog.title);
   formData.append("subtitle", blog.subtitle);
   formData.append("description", blog.description);
@@ -18,41 +23,31 @@ export async function submit(blog) {
       },
     });
     console.log("Blog saved:", response.data);
+    await router.replace({ path: "/admin/blogs" });
   } catch (error) {
     console.error("Error uploading blog:", error);
   }
-  // const storageRef = ref(storage, "blogs/" + uuidv4());
-  // const uploadTask = uploadBytesResumable(storageRef, file);
-  // uploadTask.on(
-  //   "state_changed",
-  //   (snapshot) => {
-  //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //     console.log("Upload is " + progress + "% done");
-  //     switch (snapshot.state) {
-  //       case "paused":
-  //         console.log("Upload is paused");
-  //         break;
-  //       case "running":
-  //         console.log("Upload is running");
-  //         break;
-  //     }
-  //   },
-  //   (error) => {
-  //     console.log(error);
-  //   },
-  //   () => {
-  //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-  //       blog.file = downloadURL;
-  //       writePostData(blog);
-  //     });
-  //   }
-  // );
+  await store.dispatch("setLoading", false);
 }
+
+export async function deleteBlog(id, onSuccess, onFailure) {
+  await store.dispatch("setLoading", true);
+  try {
+    const response = await axios.delete(`http://localhost:3000/blog/${id}`);
+    console.log("Blog deleted:", response.data);
+    onSuccess();
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    onFailure(error);
+  }
+  await store.dispatch("setLoading", false);
+}
+
 export function writePostData(blog) {
   const id = uuidv4();
   const { title, subtitle, description, content, file } = blog;
   set(dbRef(db, "blogs/" + id), {
-    id,
+    id: id,
     title,
     subtitle,
     description,

@@ -1,31 +1,54 @@
 <template>
   <div class="card">
     <div
-      class="card-header card-header-primary d-flex justify-content-between align-items-center px-3"
+      class="card-header card-header-primary d-flex justify-content-between align-items-center px-3 sticky-top"
     >
-      <HeaderIndex title="Hakkimizda" :xprops="xprops" :is-crud="isNew" />
-    </div>
-    <div v-if="!isNew" class="card-body">
-      <div class="row">
-        <div
-          class="col-12 mb-3"
-        >
-          <div class="card-wrapper">
-            <BlogCardAdmin :data="data" :has-show="false" :has-delete="false" :xprops="xprops" />
-          </div>
+      <div class="row w-100 justify-content-between align-items-center">
+        <div class="col">
+          <h1 class="page-header-title">Hakkimizda</h1>
+        </div>
+        <div class="col-auto">
+          <router-link
+              v-if="!data.length"
+            :to="{ name: xprops.route + '.create' }"
+            class="btn btn-add btn-primary btn-sm"
+          >
+            <span>Ekle</span>
+          </router-link>
         </div>
       </div>
     </div>
+    <div class="card-body">
+      <div v-if="data && data.length" class="row">
+        <div
+          class="col-12 col-md-3 col-lg-4 mb-3"
+          v-for="(item, index) of data"
+          :key="item.id + index"
+        >
+          <div class="card-wrapper">
+            <BlogCardAdmin
+              @delete-handler="removeBlog(item)"
+              :data="item"
+              :xprops="xprops"
+            />
+          </div>
+        </div>
+      </div>
+      <div v-else class="row text-center">
+        <h1>no data</h1>
+      </div>
+    </div>
+    <GoToTopButton />
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import HeaderIndex from "@/views/admin/components/header/HeaderIndex.vue";
 import BlogCardAdmin from "@/views/admin/components/cards/BlogCardAdmin.vue";
+import GoToTopButton from "@/components/GoToTopButton.vue";
 
 export default {
-  components: { BlogCardAdmin, HeaderIndex },
+  components: { GoToTopButton, BlogCardAdmin },
   data() {
     return {
       columns: [],
@@ -40,9 +63,6 @@ export default {
   },
   computed: {
     ...mapGetters("AdminAboutIndex", ["data", "loading"]),
-    isNew() {
-      return this.data && this.data.length < 1
-    },
   },
   watch: {
     query: {
@@ -55,9 +75,28 @@ export default {
   },
   methods: {
     ...mapActions("AdminAboutIndex", ["fetchIndexData"]),
+    removeBlog(item) {
+      const { id } = item;
+
+      const onSuccess = () => {
+        // No need to update the UI here, Vuex will handle it
+      };
+
+      const onFailure = (error) => {
+        console.log(error);
+        // Handle the error, e.g., show a notification to the user
+      };
+
+      this.$store.dispatch("AdminAboutIndex/deleteabout", {
+        id,
+        onSuccess,
+        onFailure,
+      });
+    },
   },
 };
 </script>
+
 <style>
 .table > :not(:first-child) {
   border-top: none;
@@ -66,5 +105,12 @@ export default {
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: #fff;
   color: var(--bs-table-striped-color);
+}
+.card-header.sticky-top {
+  z-index: 9;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.175);
 }
 </style>

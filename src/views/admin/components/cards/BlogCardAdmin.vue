@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="imageUrl" class="card-img-top" alt="..." />
+    <img :src="data.file" class="card-img-top" alt="..." />
     <div class="card-body">
       <h5 class="card-title">{{ data.title }}</h5>
       <p class="card-subtitle">{{ data.subtitle }}</p>
@@ -23,7 +23,7 @@
           type="button"
           class="btn btn-danger"
           data-bs-toggle="modal"
-          data-bs-target="#blogDelete"
+          :data-bs-target="`#${modalId}`"
         >
           <i class="bi bi-trash"></i>
         </button>
@@ -32,7 +32,7 @@
       <!-- Modal -->
       <div
         class="modal fade"
-        id="blogDelete"
+        :id="modalId"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabindex="-1"
@@ -114,25 +114,23 @@ export default {
     },
   },
   computed: {
+    modalId() {
+      return `blogDelete-${this.data.id}`;
+    },
     imageUrl() {
       if (!this.file || !this.file.mimetype) {
-        return '';
+        return "";
       }
-      let binary = '';
+      let binary = "";
       const bytes = new Uint8Array(this.file.buffer.data);
       for (let i = 0; i < bytes.byteLength; i++) {
         binary += String.fromCharCode(bytes[i]);
       }
       const base64 = btoa(binary);
       return `data:${this.file.mimetype};base64,${base64}`;
-    }
+    },
   },
-  methods: {
-    // deleteBlog() {
-    //   const { id, file } = this.data;
-    //   removeBlogData(id, file);
-    // },
-  },
+  methods: {},
 };
 </script>
 

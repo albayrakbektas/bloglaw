@@ -34,4 +34,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  margin: 0 !important;
+}
+</style>

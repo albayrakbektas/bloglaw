@@ -2,7 +2,7 @@
   <div class="d-flex">
     <SidebarAdmin />
     <SidebarAdminMobile />
-    <div class="container-fluid py-3" :class="{ 'custom-margin': isMobile }">
+    <div class="container-fluid py-3" style="overflow: scroll; height: 100vh" :class="{ 'custom-margin': isMobile }">
       <router-view></router-view>
     </div>
   </div>

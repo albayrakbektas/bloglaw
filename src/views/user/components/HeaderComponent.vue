@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isAdmin" class="container-fluid">
+  <div v-if="!isAdmin" class="container-fluid sticky-top bg-white" style="border-bottom: 1px solid #b1976b">
     <header
       class="d-flex flex-wrap align-items-center justify-content-between py-3"
     >

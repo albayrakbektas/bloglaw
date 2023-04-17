@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "@/store";
 
 const state = {
   data: [],
@@ -28,10 +29,29 @@ const mutations = {
 };
 
 const actions = {
+  async deleteBlog({ commit }, { id, onSuccess, onFailure }) {
+    await store.dispatch("setLoading", true);
+    try {
+      await axios.delete(`http://localhost:3000/blog/${id}`);
+      commit("DELETE_BLOG", id);
+      onSuccess();
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      onFailure(error);
+    }
+    await store.dispatch("setLoading", false);
+  },
   async fetchIndexData({ commit }) {
-    const response = await axios.get("blog");
-    const data = Object.values(response.data);
-    commit("SET_data", data);
+    try {
+      await store.dispatch("setLoading", true);
+      const response = await axios.get("blog");
+      const data = Object.values(response.data);
+      commit("SET_data", data);
+    } catch (error) {
+      console.error("Error fetching index data:", error);
+    } finally {
+      await store.dispatch("setLoading", false);
+    }
   },
   async createBlog({ commit }, blogData) {
     const response = await axios.post("blog", blogData);
@@ -44,10 +64,6 @@ const actions = {
     const blog = response.data;
     commit("UPDATE_BLOG", blog);
     return blog;
-  },
-  async deleteBlog({ commit }, id) {
-    await axios.delete(`blog/${id}`);
-    commit("DELETE_BLOG", id);
   },
 };
 

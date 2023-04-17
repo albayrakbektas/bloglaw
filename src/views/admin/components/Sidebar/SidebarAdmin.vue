@@ -68,6 +68,14 @@
           Customers
         </a>
       </li>
+      <li>
+        <a href="/admin/channels" class="nav-link text-white">
+          <svg class="bi pe-none me-2" width="16" height="16">
+            <use xlink:href="#people-circle"></use>
+          </svg>
+          Iletisim
+        </a>
+      </li>
     </ul>
     <hr />
     <div class="dropdown">

@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{'none-event' : isLoading}">
+    <SpinnerMain />
     <HeaderShortcuts />
     <HeaderComponent />
     <router-view />
-    <GoogleMap />
     <FooterMain />
   </div>
 </template>
@@ -20,15 +20,26 @@
 .form-label {
   margin: 0 !important;
 }
+.none-event {
+  pointer-events: none;
+}
+body.spinner-active {
+  overflow: hidden;
+}
 </style>
 <script setup>
 import HeaderComponent from "@/views/user/components/HeaderComponent.vue";
 import HeaderShortcuts from "@/views/user/components/HeaderShortcuts.vue";
 import FooterMain from "@/views/user/components/FooterMain.vue";
-import GoogleMap from "@/views/user/components/GoogleMap.vue";
+import SpinnerMain from "@/components/SpinnerMain.vue";
 </script>
 <script>
+import {mapGetters} from "vuex";
+
 export default {
+  computed: {
+    ...mapGetters(["isLoading"])
+  },
   data() {
     return {};
   },

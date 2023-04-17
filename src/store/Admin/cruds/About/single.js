@@ -21,8 +21,9 @@ const actions = {
     dispatch("Alert/resetState", null, { root: true });
 
     return new Promise((resolve, reject) => {
+      let params = "";
       axios
-        .post(route)
+        .post(route, params)
         .then((response) => {
           resolve(response);
         })
@@ -47,12 +48,12 @@ const actions = {
   },
   updateData({ commit }) {
     axios.get(`${route}`).then((response) => {
-      commit("setEntry", response.data);
+      commit("setEntry", response.data.data);
       commit("setLists", response.data.meta);
     });
   },
-  fetchEditData({ commit }) {
-    axios.get(`about`).then((response) => {
+  fetchEditData({ commit }, id) {
+    axios.get(`${route}/${id}`).then((response) => {
       commit("setEntry", response.data);
     });
   },

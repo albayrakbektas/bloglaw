@@ -3,7 +3,7 @@
     <div
       class="card-header card-header-primary d-flex justify-content-between align-items-center px-3"
     >
-      <h4 class="card-title m-0">About</h4>
+      <h4 class="card-title m-0">Hakkimizda</h4>
       <BackButton />
     </div>
     <div class="card-body">
@@ -51,7 +51,7 @@
               <input
                 type="file"
                 @change="onFileSelected"
-                required
+                :required="isRemoved && !entry.file"
                 class="upload-input position-absolute start-0 top-0 w-100 h-100"
               />
               <img
@@ -94,7 +94,7 @@ import { mapGetters, mapActions } from "vuex";
 import { VueEditor } from "vue2-editor";
 
 import BackButton from "@/views/admin/components/BackButton.vue";
-import { submit } from "@/services/about";
+import axios from "axios";
 
 export default {
   components: { BackButton, VueEditor },
@@ -123,7 +123,7 @@ export default {
     ]),
   },
   mounted() {
-    this.fetchEditData();
+    this.fetchEditData(this.$route.params.id);
   },
   methods: {
     ...mapActions("AdminAboutSingle", ["updateData", "fetchEditData"]),
@@ -136,14 +136,36 @@ export default {
       this.selectedFile = null;
       this.isRemoved = true;
     },
+    async updateAbout() {
+      const formData = new FormData();
+      formData.append("title", this.entry.title);
+      formData.append("subtitle", this.entry.subtitle);
+      formData.append("description", this.entry.description);
+      formData.append("content", this.entry.content.replace(/<\/?p>/g, ""));
+
+      if (this.selectedFile) {
+        formData.append("file", this.selectedFile);
+      }
+
+      try {
+        const response = await axios.put(
+          `http://localhost:3000/about/${this.entry.id}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        const updatedBlog = response.data;
+        await this.$store.dispatch("AdminAboutIndex/updateabout", updatedBlog);
+        await this.$router.push("/admin/about");
+      } catch (error) {
+        console.error("Error updating blog:", error);
+      }
+    },
     submitForm() {
-      submit(this.selectedFile, this.entry);
-    },
-    focusField(name) {
-      this.activeField = name;
-    },
-    clearFocus() {
-      this.activeField = "";
+      this.updateAbout();
     },
   },
 };

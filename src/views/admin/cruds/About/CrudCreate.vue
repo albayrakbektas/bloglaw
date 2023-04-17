@@ -3,7 +3,7 @@
     <div
       class="card-header card-header-primary d-flex justify-content-between align-items-center px-3"
     >
-      <h4 class="card-title m-0">Hakkimizda Ekle</h4>
+      <h4 class="card-title m-0">Yeni About</h4>
       <BackButton />
     </div>
     <div class="card-body">
@@ -55,7 +55,7 @@
                 class="upload-input position-absolute start-0 top-0 w-100 h-100"
               />
               <img
-                v-if="selectedFile"
+                v-if="post.file"
                 class="img-preview position-absolute top-0 h-100"
                 :src="imageUrl"
                 alt="asd"
@@ -66,7 +66,7 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" style="float: right">
+        <button type="submit" :disabled="data.length" class="btn btn-primary" style="float: right">
           Kaydet
         </button>
       </form>
@@ -78,8 +78,10 @@
 import { mapGetters, mapActions } from "vuex";
 import { VueEditor } from "vue2-editor";
 
-import { submit } from "@/services/about";
 import BackButton from "@/views/admin/components/BackButton.vue";
+import store from "@/store";
+import axios from "axios";
+import router from "@/router";
 
 export default {
   components: { BackButton, VueEditor },
@@ -98,6 +100,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("AdminAboutIndex", ["data"]),
     ...mapGetters("AdminAboutSingle", [
       "entry",
       "lists",
@@ -105,23 +108,53 @@ export default {
       "validationErrors",
     ]),
     imageUrl() {
-      return this.selectedFile ? URL.createObjectURL(this.selectedFile) : null;
+      return this.post.file ? URL.createObjectURL(this.post.file) : null;
     },
+  },
+  created() {
+    this.fetchIndexData()
   },
   beforeDestroy() {
     this.resetState();
   },
   methods: {
+    ...mapActions("AdminAboutIndex", ["fetchIndexData"]),
     ...mapActions("AdminAboutSingle", [
       "storeData",
       "fetchCreateData",
       "resetState",
     ]),
     onFileSelected(event) {
-      this.selectedFile = event.target.files[0];
+      this.post.file = event.target.files[0];
     },
     submitForm() {
-      submit(this.selectedFile, this.post);
+      this.submit(this.post);
+    },
+    async submit(blog) {
+      await store.dispatch("setLoading", true);
+      const formData = new FormData();
+      formData.append("id", blog.id);
+      formData.append("title", blog.title);
+      formData.append("subtitle", blog.subtitle);
+      formData.append("description", blog.description);
+      formData.append("content", blog.content);
+      formData.append("file", blog.file);
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/about",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log("Blog saved:", response.data);
+        await router.replace({ path: "/admin/about" });
+      } catch (error) {
+        console.error("Error uploading blog:", error);
+      }
+      await store.dispatch("setLoading", false);
     },
     focusField(name) {
       this.activeField = name;

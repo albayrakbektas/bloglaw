@@ -119,6 +119,12 @@ const routes = [
         component: () => import("@/views/admin/cruds/Staffs/CrudEdit.vue"),
         meta: { title: "cruds.blog.title" },
       },
+      {
+        path: "channels",
+        name: "channels",
+        component: () => import("@/views/admin/pages/AdminChannels.vue"),
+        meta: { title: "cruds.channels.title" },
+      },
     ],
   },
 ];

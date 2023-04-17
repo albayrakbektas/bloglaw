@@ -1,21 +1,25 @@
+# exclude .DS_Store files
 .DS_Store
-node_modules
-/dist
 
+# exclude node_modules directory
+node_modules/
 
-# local env files
+# exclude build output directories
+/dist/
+
+# exclude local environment files
 .env.local
 .env.*.local
 
-# Log files
+# exclude log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Editor directories and files
-.idea
-.vscode
+# exclude editor directories and files
+.idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
