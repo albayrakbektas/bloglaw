@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import HomeView from "../views/user/pages/Home/HomeView.vue";
 import AdminView from "@/views/admin/pages/AdminView.vue";
 import AdminDashboard from "@/views/admin/pages/AdminDashboard.vue";
+import ServicesView from "@/views/user/pages/Services/ServicesView.vue";
+import ServiceView from "@/views/user/pages/Services/ServiceView.vue";
 
 Vue.use(VueRouter);
 
@@ -21,12 +23,22 @@ const routes = [
       ),
   },
   {
-    path: "/hizmetlerimiz",
-    name: "ServicesMain",
+    path: "/iletisim",
+    name: "ChannelsView",
     component: () =>
       import(
-        /* webpackChunkName: "hizmetlerimiz" */ "../views/user/pages/Employments/EmploymentView.vue"
+        /* webpackChunkName: "iletisim" */ "../views/user/pages/Channels/ChannelsView.vue"
       ),
+  },
+  {
+    path: "/hizmetlerimiz",
+    name: "ServicesMain",
+    component: ServicesView,
+  },
+  {
+    path: "/hizmetlerimiz/:id",
+    name: "ServiceView",
+    component: ServiceView,
   },
   {
     path: "/login",
@@ -37,11 +49,19 @@ const routes = [
       ),
   },
   {
-    path: "/blog/:id",
+    path: "/hukuki-makaleler",
     name: "BlogView",
     component: () =>
       import(
         /* webpackChunkName: "blog view" */ "../views/user/pages/Blog/BlogView.vue"
+      ),
+  },
+  {
+    path: "/hukuki-makaleler/:id",
+    name: "BlogDetail",
+    component: () =>
+      import(
+        /* webpackChunkName: "blog view" */ "../views/user/pages/Blog/BlogDetail.vue"
       ),
   },
   {
@@ -193,7 +213,7 @@ export default router;
 // import VueMeta from 'vue-meta'
 // import VueRouter from 'vue-router'
 // import HomeView from "@/views/user/pages/Home/HomeView.vue";
-// import AboutView from "@/views/user/pages/About/AboutView.vue";
+// import AboutView from "@/views/user/pages/About/ChannelsView.vue";
 // import ServicesView from "@/views/user/pages/Employments/EmploymentView.vue";
 // import BlogView from "@/views/user/pages/Blog/BlogView.vue";
 // import AdminView from "@/views/admin/pages/AdminView.vue";

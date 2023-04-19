@@ -1,24 +1,40 @@
 <template>
-    <router-link to="#" class="text-decoration-none col-md-3 mb-3">
-      <div class="">
+  <router-link
+    :to="'/hizmetlerimiz/' + card.id"
+    class="text-decoration-none col-md-3 mb-3"
+  >
+    <div class="">
+      <div
+        class="h-100 py-4 pe-4 ps-3 text-white bg-dark rounded-3 position-relative has-bg"
+      >
+        <img
+          class="position-absolute img-fluid h-100 w-100 start-0 top-0"
+          style="opacity: 0.2; z-index: 99; object-fit: cover"
+          :src="bgImgUrl"
+          alt="asd"
+        />
         <div
-          class="h-100 pt-5 pb-4 pe-4 ps-3 text-white bg-dark rounded-3 position-relative has-bg"
-          :style="{ backgroundImage: `url(${imageUrl})` }"
+          class="position-relative mb-3"
+          style="height: calc(1.375rem + 1.5vw); width: calc(1.375rem + 1.5vw)"
         >
           <img
-            class="position-absolute start-0 top-0 w-100 h-100"
-            style="opacity: 0.2"
+            class="position-absolute start-0 top-0"
+            style="
+              opacity: 1;
+              height: calc(1.375rem + 1.5vw);
+              width: calc(1.375rem + 1.5vw);
+            "
             :src="imageUrl"
             alt="asd"
           />
-          <i class="bi bi-globe d-flex display-6 mb-3"></i>
-          <h2>{{card.title}}</h2>
-          <p>
-            {{card.content}}
-          </p>
         </div>
+        <h2>{{ card.title }}</h2>
+        <p>
+          {{ card.content }}
+        </p>
       </div>
-    </router-link>
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -28,7 +44,7 @@ export default {
     card: {
       type: Object,
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -54,6 +70,23 @@ export default {
         }
         const base64 = btoa(binary);
         return `data:${this.card.file.mimetype};base64,${base64}`;
+      }
+    },
+    bgImgUrl() {
+      if (!this.card.bg_file) {
+        return "";
+      }
+      // Check if card.file is a URL (string) or a buffer object
+      if (typeof this.card.bg_file === "string") {
+        return this.card.bg_file;
+      } else {
+        let binary = "";
+        const bytes = new Uint8Array(this.card.bg_file.buffer.data);
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64 = btoa(binary);
+        return `data:${this.card.bg_file.mimetype};base64,${base64}`;
       }
     },
   },

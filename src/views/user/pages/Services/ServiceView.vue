@@ -2,17 +2,17 @@
   <div class="container my-5">
     <div class="sec-title text-center pb-1 mb-3">
       <h2 class="title">Mersin Hukuk</h2>
-      <h4 class="sub-title top-line primary">Hakkimizda</h4>
+      <h4 class="sub-title top-line primary">Uzmanlik Alanimiz</h4>
     </div>
     <div class="row py-3 px-md-5 py-md-5">
       <div class="col-12 col-md-4">
-        <img :src="entry.file" class="img-fluid w-100 h-100" alt="..." />
+        <img :src="service.file" class="img-fluid w-100 h-100" alt="..." />
       </div>
       <div class="col-12 col-md-8 pt-5 pt-md-0 pe-md-5">
-        <h5 class="h1 text-center text-md-start">{{ entry.title }}</h5>
-        <p class="h4 text-center text-md-start">{{ entry.subtitle }}</p>
+        <h5 class="h1 text-center text-md-start">{{ service.title }}</h5>
+        <p class="h4 text-center text-md-start">{{ service.subtitle }}</p>
         <p class="pe-md-5" style="font-size: 1.1rem; line-height: 2rem">
-          {{ entry.content }}
+          {{ service.content.replace(/<\/?p>/g, "") }}
         </p>
       </div>
     </div>
@@ -20,32 +20,28 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
 import axios from "axios";
 
 export default {
-  name: "AboutView",
-  computed: {
-    ...mapGetters(["isMobile"])
-  },
+  name: "ServiceView",
   data() {
     return {
-      entry: {},
+      service: {},
       isLoading: true,
     };
   },
   created() {
-    // Fetch the data for the selected entry card using Axios
+    // Fetch the data for the selected service card using Axios
     axios
-        .get(`http://localhost:3000/about`)
-        .then((response) => {
-          this.entry = response.data[0];
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          console.error(error);
-          this.isLoading = false;
-        });
+      .get(`http://localhost:3000/service/${this.$route.params.id}`)
+      .then((response) => {
+        this.service = response.data;
+        this.isLoading = false;
+      })
+      .catch((error) => {
+        console.error(error);
+        this.isLoading = false;
+      });
   },
 };
 </script>

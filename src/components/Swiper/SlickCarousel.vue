@@ -3,6 +3,7 @@
     id="carouselExampleAutoplaying"
     class="carousel slide carousel-fade position-relative"
     data-bs-ride="carousel"
+    v-if="!isMobile"
   >
     <div class="carousel-indicators mb-0">
       <button
@@ -71,9 +72,14 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "SlickCarousel",
   components: {},
+  computed: {
+    ...mapGetters(["isMobile"])
+  },
   data() {
     return {};
   },
@@ -102,5 +108,10 @@ export default {
 .carousel-control-next,
 .carousel-control-prev {
   width: 5%;
+}
+@media (max-width: 575px) {
+  img {
+    //height: 20vh;
+  }
 }
 </style>

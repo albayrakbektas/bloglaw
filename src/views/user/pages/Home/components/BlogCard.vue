@@ -1,12 +1,12 @@
 <template>
-  <router-link :to="'/blog/' + data.id" class="card mb-3 mb-md-0 mb-lg-0">
+  <router-link :to="'/hukuki-makaleler/' + data.id" class="card mb-3 mb-md-0 mb-lg-0">
     <img :src="data.file" class="card-img-top img-fluid" alt="..." />
     <div class="card-body text-center">
       <h5 class="card-title">{{ data.title }}</h5>
       <p class="card-subtitle">{{ data.subtitle }}</p>
       <p class="card-text">{{ data.content }}</p>
       <div class="d-inline-block align-middle btn beko">
-        <router-link :to="'/blog/' + data.id">Makale Devami</router-link>
+        <router-link :to="'/hukuki-makaleler/' + data.id">Makale Devami</router-link>
         <i class="bi bi-arrow-right"></i>
       </div>
     </div>
@@ -76,7 +76,6 @@ img {
   background: 0 0;
   margin: 0;
   padding: 0;
-  border-color: #e6e6e6;
   opacity: 0.8;
 
   &.btn {
@@ -110,7 +109,12 @@ img {
 }
 .card {
   &:hover {
-    box-shadow: rgb(50 50 93 / 25%) 0px 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px, rgb(10 37 64 / 35%) 0px -2px 6px 0px inset;
+    .btn:after {
+      width: 100%;
+    }
   }
+}
+.card-title, .card-body {
+  border: none !important;
 }
 </style>

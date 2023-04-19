@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-list mb-5 section">
+  <div class="blog-list mb-0 mb-md-5 section">
     <div class="container">
       <div class="sec-title text-center pb-1 mb-3">
         <h4 class="sub-title top-line primary">Hukiki Makaleler</h4>

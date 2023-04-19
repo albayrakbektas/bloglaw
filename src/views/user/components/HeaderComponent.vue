@@ -1,10 +1,14 @@
 <template>
-  <div v-if="!isAdmin" class="container-fluid sticky-top bg-white" style="border-bottom: 1px solid #b1976b">
+  <div
+    v-if="!isAdmin"
+    class="container-fluid sticky-top bg-white"
+    style="border-bottom: 1px solid #b1976b"
+  >
     <header
       class="d-flex flex-wrap align-items-center justify-content-between py-3"
     >
       <router-link
-        to="/client/public"
+        to="/"
         class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
       >
         <img src="https://picsum.photos/120/40" alt="brand-logo" />
@@ -39,15 +43,15 @@
         </li>
         <li class="beko btn">
           <router-link
-            to="/uzmanlik-alanlarimiz"
+            to="/hukuki-makaleler"
             class="nav-link px-2 link-dark"
           >
-            <span>Uzmanlik alanlarimiz</span>
+            <span>Hukuki makaleler</span>
           </router-link>
         </li>
         <li class="beko btn">
-          <router-link to="/uzman-kadromuz" class="nav-link px-2 link-dark">
-            <span>Uzman kadromuz</span>
+          <router-link to="/iletisim" class="nav-link px-2 link-dark">
+            <span>Iletisim</span>
           </router-link>
         </li>
       </ul>
