@@ -25,7 +25,7 @@ const routes = [
     name: "ServicesMain",
     component: () =>
       import(
-        /* webpackChunkName: "hizmetlerimiz" */ "../views/user/pages/Services/ServicesView.vue"
+        /* webpackChunkName: "hizmetlerimiz" */ "../views/user/pages/Employments/EmploymentView.vue"
       ),
   },
   {
@@ -49,10 +49,18 @@ const routes = [
     component: AdminView,
     meta: { requiresAuth: true },
     children: [
+      //pages
       {
         path: "/",
         component: AdminDashboard,
       },
+      {
+        path: "channels",
+        name: "channels",
+        component: () => import("@/views/admin/pages/AdminChannels.vue"),
+        meta: { title: "cruds.channels.title" },
+      },
+      // cruds
       {
         path: "blogs",
         name: "blogs.index",
@@ -120,10 +128,54 @@ const routes = [
         meta: { title: "cruds.blog.title" },
       },
       {
-        path: "channels",
-        name: "channels",
-        component: () => import("@/views/admin/pages/AdminChannels.vue"),
-        meta: { title: "cruds.channels.title" },
+        path: "services",
+        name: "services.index",
+        component: () => import("@/views/admin/cruds/Services/CrudIndex.vue"),
+        meta: { title: "cruds.service.title" },
+      },
+      {
+        path: "service/create",
+        name: "service.create",
+        component: () => import("@/views/admin/cruds/Services/CrudCreate.vue"),
+        meta: { title: "cruds.service.title" },
+      },
+      {
+        path: "service/:id",
+        name: "service.show",
+        component: () => import("@/views/admin/cruds/Services/CrudShow.vue"),
+        meta: { title: "cruds.service.title" },
+      },
+      {
+        path: "service/:id/edit",
+        name: "service.edit",
+        component: () => import("@/views/admin/cruds/Services/CrudEdit.vue"),
+        meta: { title: "cruds.service.title" },
+      },
+      {
+        path: "employments",
+        name: "employments.index",
+        component: () =>
+          import("@/views/admin/cruds/Employments/CrudIndex.vue"),
+        meta: { title: "cruds.employment.title" },
+      },
+      {
+        path: "employment/create",
+        name: "employment.create",
+        component: () =>
+          import("@/views/admin/cruds/Employments/CrudCreate.vue"),
+        meta: { title: "cruds.employment.title" },
+      },
+      {
+        path: "employment/:id",
+        name: "employment.show",
+        component: () => import("@/views/admin/cruds/Employments/CrudShow.vue"),
+        meta: { title: "cruds.employment.title" },
+      },
+      {
+        path: "employment/:id/edit",
+        name: "employment.edit",
+        component: () => import("@/views/admin/cruds/Employments/CrudEdit.vue"),
+        meta: { title: "cruds.employment.title" },
       },
     ],
   },
@@ -142,7 +194,7 @@ export default router;
 // import VueRouter from 'vue-router'
 // import HomeView from "@/views/user/pages/Home/HomeView.vue";
 // import AboutView from "@/views/user/pages/About/AboutView.vue";
-// import ServicesView from "@/views/user/pages/Services/ServicesView.vue";
+// import ServicesView from "@/views/user/pages/Employments/EmploymentView.vue";
 // import BlogView from "@/views/user/pages/Blog/BlogView.vue";
 // import AdminView from "@/views/admin/pages/AdminView.vue";
 // import AdminDashboard from "@/views/admin/pages/AdminDashboard.vue";

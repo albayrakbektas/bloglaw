@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="data.file" class="card-img-top" alt="..." />
+    <img :src="imageUrl" class="card-img-top" alt="..." />
     <div class="card-body">
       <h5 class="card-title">{{ data.title }}</h5>
       <p class="card-subtitle">{{ data.subtitle }}</p>
@@ -113,21 +113,43 @@ export default {
       type: Object,
     },
   },
+  // computed: {
+  //   modalId() {
+  //     return `blogDelete-${this.data.id}`;
+  //   },
+  //   imageUrl() {
+  //     if (!this.file || !this.file.mimetype) {
+  //       return "";
+  //     }
+  //     let binary = "";
+  //     const bytes = new Uint8Array(this.file.buffer.data);
+  //     for (let i = 0; i < bytes.byteLength; i++) {
+  //       binary += String.fromCharCode(bytes[i]);
+  //     }
+  //     const base64 = btoa(binary);
+  //     return `data:${this.file.mimetype};base64,${base64}`;
+  //   },
+  // },
   computed: {
     modalId() {
       return `blogDelete-${this.data.id}`;
     },
     imageUrl() {
-      if (!this.file || !this.file.mimetype) {
+      if (!this.data.file) {
         return "";
       }
-      let binary = "";
-      const bytes = new Uint8Array(this.file.buffer.data);
-      for (let i = 0; i < bytes.byteLength; i++) {
-        binary += String.fromCharCode(bytes[i]);
+      // Check if data.file is a URL (string) or a buffer object
+      if (typeof this.data.file === 'string') {
+        return this.data.file;
+      } else {
+        let binary = "";
+        const bytes = new Uint8Array(this.data.file.buffer.data);
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64 = btoa(binary);
+        return `data:${this.data.file.mimetype};base64,${base64}`;
       }
-      const base64 = btoa(binary);
-      return `data:${this.file.mimetype};base64,${base64}`;
     },
   },
   methods: {},

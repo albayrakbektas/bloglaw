@@ -1,13 +1,13 @@
 <template>
 <div>
-  servisler
+  employment
 </div>
 </template>
 
 <script>
 
 export default {
-  name: "ServicesView",
+  name: "EmploymentView",
   components: {}
 }
 </script>

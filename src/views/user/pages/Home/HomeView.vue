@@ -1,27 +1,27 @@
 <template>
   <div class="">
     <SlickCarousel />
-    <ServicesCard />
+    <EmploymentCards />
     <div class="container">
       <OfficeCard />
       <BlogCards />
       <KeyWords />
-      <LawCard />
+      <ServiceCards />
     </div>
   </div>
 </template>
 
 <script>
-import LawCard from "@/views/user/components/LawCard.vue";
 import BlogCards from "@/views/user/pages/Home/components/BlogCards.vue";
 import SlickCarousel from "@/components/Swiper/SlickCarousel.vue";
-import ServicesCard from "@/views/user/pages/Services/components/ServicesCard.vue";
 import OfficeCard from "@/views/user/pages/Home/components/OfficeCard.vue";
 import KeyWords from "@/views/user/pages/Home/components/KeyWords.vue";
+import EmploymentCards from "@/views/user/pages/Employments/components/EmploymentCards.vue";
+import ServiceCards from "@/views/user/pages/Services/ServiceCards.vue";
 
 export default {
   name: "HomeView",
-  components: { KeyWords, OfficeCard, ServicesCard, SlickCarousel, BlogCards, LawCard },
+  components: {ServiceCards, EmploymentCards, KeyWords, OfficeCard, SlickCarousel, BlogCards },
   data() {
     return {
       swiperOptions: {

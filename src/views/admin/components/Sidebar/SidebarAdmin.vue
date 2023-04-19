@@ -69,6 +69,22 @@
         </a>
       </li>
       <li>
+        <a href="/admin/services" class="nav-link text-white">
+          <svg class="bi pe-none me-2" width="16" height="16">
+            <use xlink:href="#people-circle"></use>
+          </svg>
+          Servisler
+        </a>
+      </li>
+      <li>
+        <a href="/admin/employments" class="nav-link text-white">
+          <svg class="bi pe-none me-2" width="16" height="16">
+            <use xlink:href="#people-circle"></use>
+          </svg>
+          Is alanlari
+        </a>
+      </li>
+      <li>
         <a href="/admin/channels" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16">
             <use xlink:href="#people-circle"></use>
