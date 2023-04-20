@@ -23,9 +23,7 @@
               <router-link to="/" class="nav-link">Anasayfa</router-link>
             </li>
             <li class="btn beko mb-2">
-              <router-link to="/hizmetlerimiz"
-                >Hizmetlerimiz</router-link
-              >
+              <router-link to="/hizmetlerimiz">Hizmetlerimiz</router-link>
             </li>
             <li class="btn beko mb-2">
               <router-link to="/hakkimizda" class="nav-link"
@@ -49,37 +47,51 @@
           <ul class="list-unstyled">
             <li class="btn beko mb-2">
               <i class="bi bi-telephone"></i>
-              <a href="tel:123-456-7890">123-456-7890</a>
+              <a :href="'tel:' + channels.phone">{{ channels.phone }}</a>
             </li>
             <li class="btn beko mb-2">
               <i class="bi bi-envelope"></i>
-              <a href="mailto:info@company.com">info@company.com</a>
+              <a
+                style="text-transform: lowercase"
+                :href="'mailto:' + channels.email"
+                >{{ channels.email }}</a
+              >
             </li>
             <li class="btn beko mb-2">
               <i class="bi bi-geo-alt"></i>
-              <span>123 Main Street, Anytown USA</span>
+              <a
+                style="text-transform: lowercase"
+                :href="
+                  'https://www.google.com/maps/search/?api=1&query=' +
+                  encodeURIComponent(channels.address)
+                "
+                target="_blank"
+                >{{ channels.address }}</a
+              >
             </li>
             <li class="btn beko mb-2">
               <i class="bi bi-whatsapp"></i>
-              <a href="https://wa.me/1234567890">123-456-7890</a>
+              <a :href="'https://wa.me/' + channels.whatsapp">{{
+                channels.phone
+              }}</a>
             </li>
-            <li class="btn beko mb-2">
-              <i class="bi bi-instagram"></i>
-              <a href="https://www.instagram.com/company/">@company</a>
-            </li>
+            <!--            <li class="btn beko mb-2">-->
+            <!--              <i class="bi bi-instagram"></i>-->
+            <!--              <a href="https://www.instagram.com/company/">@company</a>-->
+            <!--            </li>-->
           </ul>
         </div>
         <div class="col-md-3">
           <h4>Makaleler</h4>
           <ul class="list-unstyled" style="display: inline-grid">
-            <li class="btn beko mb-2">
-              <router-link to="#">Makale Devami</router-link>
-            </li>
-            <li class="btn beko mb-2">
-              <router-link to="#">Makale Devami</router-link>
-            </li>
-            <li class="btn beko mb-2">
-              <router-link to="#">Makale Devami</router-link>
+            <li
+              class="btn beko mb-2"
+              v-for="(item, index) in firstThreeElements"
+              :key="item + index"
+            >
+              <router-link :to="'/hukuki-makaleler/' + item.id">{{
+                item.title
+              }}</router-link>
             </li>
           </ul>
         </div>
@@ -96,12 +108,47 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "FooterMain",
   data() {
     return {
       currentYear: new Date().getFullYear(),
+      blogs: [],
+      channels: {},
     };
+  },
+  computed: {
+    firstThreeElements() {
+      return this.blogs.slice(0, 3);
+    },
+  },
+  created() {
+    this.fetchBlogData();
+    this.fetchChannelsData();
+  },
+  methods: {
+    fetchBlogData() {
+      axios
+        .get(`/blog`)
+        .then((response) => {
+          this.blogs = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    fetchChannelsData() {
+      axios
+        .get(`/channels`)
+        .then((response) => {
+          this.channels = response.data[0];
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>

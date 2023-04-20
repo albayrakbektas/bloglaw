@@ -60,7 +60,7 @@ const actions = {
     return about;
   },
   async updateabout({ commit }, aboutData) {
-    const response = await axios.put(`about/${aboutData.id}`, aboutData);
+    const response = await axios.post(`about/${aboutData.id}`, aboutData);
     const about = response.data;
     commit("UPDATE_about", about);
     return about;

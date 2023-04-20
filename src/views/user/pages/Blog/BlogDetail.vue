@@ -12,7 +12,7 @@
         <h5 class="h1 text-center text-md-start">{{ blogData.title }}</h5>
         <p class="h4 text-center text-md-start">{{ blogData.subtitle }}</p>
         <p class="pe-md-5" style="font-size: 1.1rem; line-height: 2rem">
-          {{ blogData.content.replace(/<\/?p>/g, "") }}
+          {{ blogData.content }}
         </p>
       </div>
     </div>
