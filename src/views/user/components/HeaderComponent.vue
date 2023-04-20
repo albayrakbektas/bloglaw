@@ -1,24 +1,25 @@
 <template>
   <div
     v-if="!isAdmin"
-    class="container-fluid sticky-top bg-white"
-    style="border-bottom: 1px solid #b1976b"
+    class="container-fluid sticky-top bg-dark"
+    style="border-bottom: 1px solid #b1976b; height: 70px"
   >
     <header
-      class="d-flex flex-wrap align-items-center justify-content-between py-3"
+      class="d-flex flex-wrap align-items-center justify-content-between"
+      style="height: 100%;"
     >
       <router-link
         to="/"
-        class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
+        class="d-flex align-items-center col-md-3 mb-md-0 text-white text-decoration-none"
       >
-        <img src="https://picsum.photos/120/40" alt="brand-logo" />
+        <img style="height: 68px" src="https://picsum.photos/120/70" alt="brand-logo" />
       </router-link>
       <div v-if="isMobile" class="d-flex align-items-center">
         <a href="mailto:albayrakbektas@gmail.com" class="text-primary me-4">
-          <i class="bi bi-envelope text-dark" style="font-weight: bolder"></i>
+          <i class="bi bi-envelope text-white" style="font-weight: bolder"></i>
         </a>
         <a href="tel:+905050070844" class="text-primary me-2">
-          <i class="bi bi-telephone text-dark" style="font-weight: bolder"></i>
+          <i class="bi bi-telephone text-white" style="font-weight: bolder"></i>
         </a>
         <MobileMenu />
       </div>
@@ -27,30 +28,30 @@
         class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0"
       >
         <li class="beko btn">
-          <router-link to="/" class="nav-link px-2 link-secondary">
+          <router-link to="/" class="nav-link px-2 text-white">
             <span>Anasayfa</span>
           </router-link>
         </li>
         <li class="beko btn">
-          <router-link to="/hizmetlerimiz" class="nav-link px-2 link-secondary">
+          <router-link to="/hizmetlerimiz" class="nav-link px-2 text-white">
             <span>Hizmetlerimiz</span>
           </router-link>
         </li>
         <li class="beko btn">
-          <router-link to="/hakkimizda" class="nav-link px-2 link-dark">
+          <router-link to="/hakkimizda" class="nav-link px-2 text-white">
             <span>Hakkimizda</span>
           </router-link>
         </li>
         <li class="beko btn">
           <router-link
             to="/hukuki-makaleler"
-            class="nav-link px-2 link-dark"
+            class="nav-link px-2 text-white"
           >
             <span>Hukuki makaleler</span>
           </router-link>
         </li>
         <li class="beko btn">
-          <router-link to="/iletisim" class="nav-link px-2 link-dark">
+          <router-link to="/iletisim" class="nav-link px-2 text-white">
             <span>Iletisim</span>
           </router-link>
         </li>

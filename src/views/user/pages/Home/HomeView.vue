@@ -1,6 +1,7 @@
 <template>
   <div class="">
     <SlickCarousel />
+    <BrandView />
     <EmploymentCards />
     <div class="container">
       <OfficeCard />
@@ -20,10 +21,11 @@ import KeyWords from "@/views/user/pages/Home/components/KeyWords.vue";
 import EmploymentCards from "@/views/user/pages/Employments/components/EmploymentCards.vue";
 import ServiceCards from "@/views/user/pages/Services/ServiceCards.vue";
 import GoogleMap from "@/views/user/components/GoogleMap.vue";
+import BrandView from "@/views/user/pages/Home/components/BrandView.vue";
 
 export default {
   name: "HomeView",
-  components: {GoogleMap, ServiceCards, EmploymentCards, KeyWords, OfficeCard, SlickCarousel, BlogCards },
+  components: {BrandView, GoogleMap, ServiceCards, EmploymentCards, KeyWords, OfficeCard, SlickCarousel, BlogCards },
   data() {
     return {
       swiperOptions: {

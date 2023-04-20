@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-dark bg-light">
-    <button class="navbar-toggler" type="button" @click="isOpen = !isOpen">
-      <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-md navbar-dark">
+    <button class="navbar-toggler" type="button" style="outline: none; border: none" @click="isOpen = !isOpen">
+      <i class="bi bi-list text-white h1"></i>
     </button>
 
     <div class="navbar-collapse bg-dark" :class="{ show: isOpen }">
@@ -14,12 +14,37 @@
       >
         <i class="bi bi-x-lg"></i>
       </button>
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 d-block">
-        <li><a href="#" class="nav-link px-2 text-white link-secondary">Anasayfa</a></li>
-        <li><a href="#" class="nav-link px-2 text-white link-dark">Hakkimizda</a></li>
-        <li><a href="#" class="nav-link px-2 text-white link-dark">Uzmanlik alanlarimiz</a></li>
-        <li><a href="#" class="nav-link px-2 text-white link-dark">Uzman kadromuz</a></li>
+      <ul
+        class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 d-block"
+      >
+        <li class="beko btn">
+          <router-link to="/" class="nav-link px-2 text-white">
+            <span>Anasayfa</span>
+          </router-link>
+        </li>
+        <li class="beko btn">
+          <router-link to="/hizmetlerimiz" class="nav-link px-2 text-white">
+            <span>Hizmetlerimiz</span>
+          </router-link>
+        </li>
+        <li class="beko btn">
+          <router-link to="/hakkimizda" class="nav-link px-2 text-white">
+            <span>Hakkimizda</span>
+          </router-link>
+        </li>
+        <li class="beko btn">
+          <router-link to="/hukuki-makaleler" class="nav-link px-2 text-white">
+            <span>Hukuki makaleler</span>
+          </router-link>
+        </li>
+        <li class="beko btn">
+          <router-link to="/iletisim" class="nav-link px-2 text-white">
+            <span>Iletisim</span>
+          </router-link>
+        </li>
       </ul>
+      <!-- image here -->
+      <img class="img-fluid mt-5" src="https://picsum.photos/100"  alt=""/>
     </div>
   </nav>
 </template>
@@ -30,6 +55,11 @@ export default {
     return {
       isOpen: false,
     };
+  },
+  watch: {
+    $route() {
+      this.isOpen = false;
+    },
   },
   mounted() {
     document.addEventListener("click", this.closeMenuOnClickOutside);
@@ -94,5 +124,17 @@ export default {
     border: none;
     outline: none;
   }
+}
+li {
+  width: 100%;
+  text-align: start;
+}
+span {
+  border-bottom: 1px solid #fff;
+
+}
+a {
+  width: 100%;
+  padding-bottom: 0 !important;
 }
 </style>

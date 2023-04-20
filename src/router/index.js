@@ -5,6 +5,8 @@ import AdminView from "@/views/admin/pages/AdminView.vue";
 import AdminDashboard from "@/views/admin/pages/AdminDashboard.vue";
 import ServicesView from "@/views/user/pages/Services/ServicesView.vue";
 import ServiceView from "@/views/user/pages/Services/ServiceView.vue";
+import EmploymentView from "@/views/user/pages/Employments/EmploymentView.vue";
+import EmploymentDetail from "@/views/user/pages/Employments/EmploymentDetail.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +31,16 @@ const routes = [
       import(
         /* webpackChunkName: "iletisim" */ "../views/user/pages/Channels/ChannelsView.vue"
       ),
+  },
+  {
+    path: "/is-alanlarimiz",
+    name: "EmploymentView",
+    component: EmploymentView,
+  },
+  {
+    path: "/is-alanlarimiz/:id",
+    name: "EmploymentDetail",
+    component: EmploymentDetail,
   },
   {
     path: "/hizmetlerimiz",

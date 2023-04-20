@@ -33,13 +33,13 @@
               >
             </li>
             <li class="btn beko mb-2">
-              <router-link to="/uzmanlik-alanlarimiz" class="nav-link"
-                >Uzmanlık alanlarımız</router-link
+              <router-link to="/hukuki-makaleler" class="nav-link"
+                >Hukuki Makaleler</router-link
               >
             </li>
             <li class="btn beko mb-2">
-              <router-link to="/uzman-kadromuz" class="nav-link"
-                >Uzman kadromuz</router-link
+              <router-link to="/iletisim" class="nav-link"
+                >Iletisim</router-link
               >
             </li>
           </ul>

@@ -1,6 +1,6 @@
 <template>
   <router-link
-    to="#"
+    :to="'/is-alanlarimiz/' + card.id"
     class="text-decoration-none col-md-4 mb-3 mb-md-0 mb-lg-0 p-0 hover-enlarge"
     style="
       z-index: 4;
