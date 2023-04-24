@@ -1,18 +1,22 @@
 <template>
   <div
-    v-if="!isAdmin"
+    v-if="!isAdmin && !isLogin"
     class="container-fluid sticky-top bg-dark"
     style="border-bottom: 1px solid #b1976b; height: 70px"
   >
     <header
       class="d-flex flex-wrap align-items-center justify-content-between"
-      style="height: 100%;"
+      style="height: 100%"
     >
       <router-link
         to="/"
         class="d-flex align-items-center col-md-3 mb-md-0 text-white text-decoration-none"
       >
-        <img style="height: 68px" src="https://picsum.photos/120/70" alt="brand-logo" />
+        <img
+          style="height: 68px"
+          src="https://picsum.photos/120/70"
+          alt="brand-logo"
+        />
       </router-link>
       <div v-if="isMobile" class="d-flex align-items-center">
         <a href="mailto:albayrakbektas@gmail.com" class="text-primary me-4">
@@ -43,10 +47,7 @@
           </router-link>
         </li>
         <li class="beko btn">
-          <router-link
-            to="/hukuki-makaleler"
-            class="nav-link px-2 text-white"
-          >
+          <router-link to="/hukuki-makaleler" class="nav-link px-2 text-white">
             <span>Hukuki makaleler</span>
           </router-link>
         </li>
@@ -71,6 +72,9 @@ export default {
     ...mapGetters(["isMobile"]),
     isAdmin() {
       return this.$route.path && this.$route.path.includes("admin");
+    },
+    isLogin() {
+      return this.$route.path.includes("login");
     },
   },
 };

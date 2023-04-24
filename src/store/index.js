@@ -3,8 +3,7 @@ import Vuex from "vuex";
 
 //modules
 import mobile from "./modules/mobile";
-import loading from "./modules/loading";
-
+import loadingModule from "./modules/loading";
 // cruds
 import BlogsIndex from "./Admin/cruds/Blogs/index";
 import BlogsSingle from "./Admin/cruds/Blogs/single";
@@ -23,7 +22,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   modules: {
     mobile,
-    loading,
+    loadingModule,
     BlogsSingle,
     BlogsIndex,
     AdminAboutIndex,

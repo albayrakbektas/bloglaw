@@ -79,7 +79,6 @@ import { mapGetters, mapActions } from "vuex";
 import { VueEditor } from "vue2-editor";
 
 import BackButton from "@/views/admin/components/BackButton.vue";
-import store from "@/store";
 import axios from "axios";
 import router from "@/router";
 
@@ -124,6 +123,7 @@ export default {
       "fetchCreateData",
       "resetState",
     ]),
+    ...mapActions("loadingModule", ["setLoading"]),
     onFileSelected(event) {
       this.post.file = event.target.files[0];
     },
@@ -131,7 +131,7 @@ export default {
       this.submit(this.post);
     },
     async submit(blog) {
-      await store.dispatch("setLoading", true);
+      await this.setLoading(true)
       const formData = new FormData();
       formData.append("id", blog.id);
       formData.append("title", blog.title);
@@ -154,7 +154,7 @@ export default {
       } catch (error) {
         console.error("Error uploading blog:", error);
       }
-      await store.dispatch("setLoading", false);
+      await this.setLoading(false)
     },
     focusField(name) {
       this.activeField = name;

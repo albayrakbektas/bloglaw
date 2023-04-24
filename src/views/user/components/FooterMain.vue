@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-dark text-light">
+  <footer v-if="!isAdmin && !isLogin" class="bg-dark text-light">
     <div class="container py-4">
       <div class="row">
         <div class="col-md-3 text-center">
@@ -122,6 +122,12 @@ export default {
   computed: {
     firstThreeElements() {
       return this.blogs.slice(0, 3);
+    },
+    isAdmin() {
+      return this.$route.path && this.$route.path.includes("admin");
+    },
+    isLogin() {
+      return this.$route.path.includes("login");
     },
   },
   created() {

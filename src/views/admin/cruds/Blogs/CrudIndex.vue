@@ -75,7 +75,7 @@ export default {
         // Handle the error, e.g., show a notification to the user
       };
 
-      this.$store.dispatch("BlogsIndex/deleteBlog", { id, onSuccess, onFailure });
+      this.$store.dispatch("BlogsIndex/deleteData", { id, onSuccess, onFailure });
     },
   },
 };

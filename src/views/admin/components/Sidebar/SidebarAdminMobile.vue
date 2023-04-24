@@ -142,7 +142,7 @@
         <li><a class="dropdown-item" href="#">Settings</a></li>
         <li><a class="dropdown-item" href="#">Profile</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li><a @click.stop="logout" class="dropdown-item" href="#">Sign out</a></li>
       </ul>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
@@ -190,13 +190,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "SiderbarAdminMobile",
   computed: {
     ...mapGetters(["isMobile"]),
   },
+  methods: { ...mapActions("Auth", ["logout"]) },
 };
 </script>
 

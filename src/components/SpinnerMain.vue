@@ -1,5 +1,5 @@
 <template>
-  <div class="spinner-container" v-if="isBlocked">
+  <div class="spinner-container" v-if="isLoading">
     <div class="spinner-border text-primary" role="status">
       <span class="sr-only text-primary fw-bold">Loading...</span>
     </div>
@@ -12,7 +12,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "SpinnerMain",
   computed: {
-    ...mapGetters(["isLoading"]),
+    ...mapGetters("loadingModule", ["isLoading"]),
   },
   data() {
     return {

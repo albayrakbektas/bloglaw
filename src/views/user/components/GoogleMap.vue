@@ -1,7 +1,7 @@
 <template>
   <div
-    class="container-fluid w-100 h-100 position-relative"
-    style="height: 300px; padding-bottom: 2.5rem"
+    class="container-fluid w-100 h-100 position-relative map-container"
+    :class="{'in-home': $route.path === '/'}"
   >
     <GmapMap
       :center="center"
@@ -88,3 +88,15 @@ export default {
   },
 };
 </script>
+<style scoped lang="scss">
+@media (max-width: 575px) {
+  .map-container {
+    height: 25rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+}
+.in-home {
+  height: 25rem !important;
+  padding-bottom: 2.5rem !important;
+}
+</style>

@@ -1,8 +1,9 @@
 import axios from "axios";
+import store from "@/store";
+
 function initialState() {
   return {
     entry: {},
-    loading: false,
   };
 }
 
@@ -10,46 +11,12 @@ const route = "blog";
 
 const getters = {
   entry: (state) => state.entry,
-  lists: (state) => state.lists,
-  loading: (state) => state.loading,
-  validationErrors: (state) => state.validationErrors,
 };
 
 const actions = {
-  storeData({ commit, dispatch }) {
-    commit("setLoading", true);
-    dispatch("Alert/resetState", null, { root: true });
-
-    return new Promise((resolve, reject) => {
-      let params = ""
-      axios
-        .post(route, params)
-        .then((response) => {
-          resolve(response);
-        })
-        .catch((error) => {
-          let message = error.response.data.message || error.message;
-          let errors = error.response.data;
-
-          commit("setValidationErrors", errors);
-
-          dispatch(
-            "Alert/setAlert",
-            { message: message, errors: errors, color: "danger" },
-            { root: true }
-          );
-
-          reject(error);
-        })
-        .finally(() => {
-          commit("setLoading", false);
-        });
-    });
-  },
   updateData({ commit }) {
     axios.get(`${route}`).then((response) => {
-      commit("setEntry", response.data.data);
-      commit("setLists", response.data.meta);
+      commit("setEntry", response.data);
     });
   },
   fetchEditData({ commit }, id) {
@@ -59,11 +26,20 @@ const actions = {
   },
   fetchShowData({ commit }, id) {
     axios.get(`${route}/${id}`).then((response) => {
-      commit("setEntry", response.data.data);
+      commit("setEntry", response.data);
     });
   },
-  resetState({ commit }) {
-    commit("resetState");
+  async deleteData({ commit }, { id, onSuccess, onFailure }) {
+    await store.dispatch("loadingModule/setLoading", true);
+    try {
+      await axios.delete(`/blog/${id}`);
+      commit("deleteData", id);
+      onSuccess();
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      onFailure(error);
+    }
+    await store.dispatch("loadingModule/setLoading", false);
   },
 };
 
@@ -71,8 +47,8 @@ const mutations = {
   setEntry(state, entry) {
     state.entry = entry;
   },
-  setLoading(state, loading) {
-    state.loading = loading;
+  deleteData(state, id) {
+    state.entry = state.data.filter((blog) => blog.id !== id);
   },
 };
 

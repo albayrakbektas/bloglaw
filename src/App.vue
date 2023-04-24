@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{'none-event' : isLoading}">
+  <div id="app" :class="{ 'none-event': isLoading }">
     <SpinnerMain />
     <HeaderShortcuts />
     <HeaderComponent />
@@ -10,7 +10,9 @@
 
 <style lang="scss">
 body {
-  font-family: 'Georgia', serif !important;
+  font-family: "Georgia", serif !important;
+  margin: 0;
+  padding: 0;
 }
 #app {
   font-family: Georgia, sans-serif;
@@ -37,11 +39,11 @@ import FooterMain from "@/views/user/components/FooterMain.vue";
 import SpinnerMain from "@/components/SpinnerMain.vue";
 </script>
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["isLoading"])
+    ...mapGetters(["isLoading"]),
   },
   data() {
     return {};

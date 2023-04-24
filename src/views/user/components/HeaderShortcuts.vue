@@ -1,5 +1,8 @@
 <template>
-  <div v-if="!isMobile && !isAdmin" class="container-fluid w-100 bg-dark">
+  <div
+    v-if="!isMobile && !isAdmin && !isLogin"
+    class="container-fluid w-100 bg-dark"
+  >
     <div
       class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
     >
@@ -8,14 +11,14 @@
       >
         <li class="beko btn">
           <a
-              :href="
-                  'https://www.google.com/maps/search/?api=1&query=' +
-                  encodeURIComponent(channels.address)
-                "
+            :href="
+              'https://www.google.com/maps/search/?api=1&query=' +
+              encodeURIComponent(channels.address)
+            "
             target="_blank"
             rel="noopener noreferrer"
             class="nav-link text-white"
-              style="text-transform: lowercase"
+            style="text-transform: lowercase"
           >
             <i class="bi bi-geo-alt text-danger"></i>
             {{ channels.address }}
@@ -28,7 +31,10 @@
           </a>
         </li>
         <li class="beko btn">
-          <a :href="'https://wa.me/' + channels.phone" class="nav-link text-white">
+          <a
+            :href="'https://wa.me/' + channels.phone"
+            class="nav-link text-white"
+          >
             <i class="bi bi-whatsapp text-success"></i>
             {{ channels.phone }}
           </a>
@@ -60,6 +66,9 @@ export default {
     isAdmin() {
       return this.$route.path && this.$route.path.includes("admin");
     },
+    isLogin() {
+      return this.$route.path.includes("login");
+    },
   },
   created() {
     this.fetchChannelsData();
@@ -79,4 +88,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+* {
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+</style>

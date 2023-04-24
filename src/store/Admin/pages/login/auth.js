@@ -1,8 +1,7 @@
 import firebase from "firebase/app";
-import { signInWithEmailAndPassword, signOut} from "firebase/auth";
-import {auth} from "@/services/firebase";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth } from "@/services/firebase";
 import router from "@/router";
-
 
 const state = {
   bearerToken: localStorage.getItem("bearerToken") || null,
@@ -22,8 +21,15 @@ const mutations = {
 };
 const actions = {
   logout({ commit }) {
-    localStorage.removeItem("bearerToken");
-    commit("setBearerToken", null);
+    signOut(auth)
+      .then(() => {
+        localStorage.removeItem("bearerToken");
+        commit("setBearerToken", null);
+        router.push("/login");
+      })
+      .catch((error) => {
+        console.error("Error logging out: ", error);
+      });
   },
   checkAuth({ commit }) {
     firebase.auth().onAuthStateChanged((user) => {
@@ -40,27 +46,30 @@ const actions = {
   },
 };
 
-export const login  = async function (email, password) {
-  signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        if (user) {
-          router.replace({path: "/admin/"})
-        }
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage)
-      });
-}
-export const logout  = async function () {
-  signOut(auth).then(() => {
-    router.replace({path: "/login"})
-  }).catch((error) => {
-    console.log(error)
-  });
-}
+export const login = async function (email, password) {
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      if (user) {
+        router.replace({ path: "/admin/" });
+      }
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      throw error;
+    });
+};
+// export const logout = async function () {
+//   signOut(auth)
+//     .then(() => {
+//       router.replace({ path: "/login" });
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
 
 export default {
   namespaced: true,

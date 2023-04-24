@@ -1,3 +1,4 @@
+// loadingModule.js
 const state = {
   isLoading: false,
 };
@@ -7,20 +8,21 @@ const getters = {
 };
 
 const mutations = {
-  SET_LOADING(state, value) {
+  setLoading(state, value) {
     state.isLoading = value;
   },
 };
 
 const actions = {
   setLoading({ commit }, value) {
-    commit("SET_LOADING", value);
+    commit("setLoading", value);
   },
 };
 
 export default {
+  namespaced: true,
   state,
   getters,
-  mutations,
   actions,
+  mutations,
 };

@@ -9,7 +9,7 @@
         </div>
         <div class="col-auto">
           <router-link
-              v-if="!data.length"
+            v-if="!data.length"
             :to="{ name: xprops.route + '.create' }"
             class="btn btn-add btn-primary btn-sm"
           >
@@ -75,7 +75,9 @@ export default {
   },
   methods: {
     ...mapActions("AdminAboutIndex", ["fetchIndexData"]),
+    ...mapActions("loadingModule", ["setLoading"]),
     removeBlog(item) {
+      this.setLoading(true);
       const { id } = item;
 
       const onSuccess = () => {
@@ -92,6 +94,7 @@ export default {
         onSuccess,
         onFailure,
       });
+      this.setLoading(false);
     },
   },
 };

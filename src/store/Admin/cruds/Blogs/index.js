@@ -11,59 +11,66 @@ const getters = {
 };
 
 const mutations = {
-  SET_data(state, data) {
+  setData(state, data) {
     state.data = data;
   },
-  ADD_BLOG(state, blog) {
+  addData(state, blog) {
     state.data.push(blog);
   },
-  UPDATE_BLOG(state, blog) {
+  updateData(state, blog) {
     const index = state.data.findIndex((b) => b.id === blog.id);
     if (index !== -1) {
       state.data.splice(index, 1, blog);
     }
   },
-  DELETE_BLOG(state, id) {
+  deleteData(state, id) {
     state.data = state.data.filter((blog) => blog.id !== id);
   },
 };
 
 const actions = {
-  async deleteBlog({ commit }, { id, onSuccess, onFailure }) {
-    await store.dispatch("setLoading", true);
+  async deleteData({ commit }, { id, onSuccess, onFailure }) {
+    await store.dispatch("loadingModule/setLoading", true);
     try {
-      await axios.delete(`http://localhost:3000/blog/${id}`);
-      commit("DELETE_BLOG", id);
+      await axios.delete(`/blog/${id}`);
+      commit("deleteData", id);
       onSuccess();
     } catch (error) {
       console.error("Error deleting blog:", error);
       onFailure(error);
     }
-    await store.dispatch("setLoading", false);
+    await store.dispatch("loadingModule/setLoading", false);
   },
   async fetchIndexData({ commit }) {
     try {
       await store.dispatch("setLoading", true);
       const response = await axios.get("blog");
       const data = Object.values(response.data);
-      commit("SET_data", data);
+      commit("setData", data);
     } catch (error) {
       console.error("Error fetching index data:", error);
     } finally {
       await store.dispatch("setLoading", false);
     }
   },
-  async createBlog({ commit }, blogData) {
+  async createData({ commit }, blogData) {
     const response = await axios.post("blog", blogData);
     const blog = response.data;
-    commit("ADD_BLOG", blog);
+    commit("addData", blog);
     return blog;
   },
-  async updateBlog({ commit }, blogData) {
-    const response = await axios.put(`blog/${blogData.id}`, blogData);
-    const blog = response.data;
-    commit("UPDATE_BLOG", blog);
-    return blog;
+  async updateData({ commit }, blogData) {
+    try {
+      const response = await axios.put(`blog/${blogData.id}`, blogData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const blog = response.data;
+      commit("updateData", blog);
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 

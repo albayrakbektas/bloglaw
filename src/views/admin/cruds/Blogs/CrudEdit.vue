@@ -127,6 +127,7 @@ export default {
   },
   methods: {
     ...mapActions("BlogsSingle", ["updateData", "fetchEditData"]),
+    ...mapActions("loadingModule", ["setLoading"]),
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
       this.previewSrc = URL.createObjectURL(event.target.files[0]);
@@ -137,6 +138,7 @@ export default {
       this.isRemoved = true;
     },
     async updateBlog() {
+      await this.setLoading(true);
       const formData = new FormData();
       formData.append("title", this.entry.title);
       formData.append("subtitle", this.entry.subtitle);
@@ -148,21 +150,12 @@ export default {
       }
 
       try {
-        const response = await axios.put(
-          `http://localhost:3000/blog/${this.entry.id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        const updatedBlog = response.data;
-        await this.$store.dispatch("BlogsIndex/updateBlog", updatedBlog);
+        await axios.put(`/blog/${this.entry.id}`, formData);
         await this.$router.push("/admin/blogs");
       } catch (error) {
         console.error("Error updating blog:", error);
       }
+      await this.setLoading(false);
     },
     submitForm() {
       this.updateBlog();
