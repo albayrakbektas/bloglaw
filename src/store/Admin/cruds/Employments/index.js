@@ -1,3 +1,5 @@
+import { addData } from "@/utils/methods";
+import store from "core-js/internals/shared-store";
 import axios from "axios";
 
 const state = {
@@ -6,60 +8,40 @@ const state = {
 
 const getters = {
   data: (state) => state.data,
-  blogById: (state) => (id) => state.data.find((blog) => blog.id === id),
 };
 
 const mutations = {
-  SET_data(state, data) {
+  setData(state, data) {
     state.data = data;
   },
-  ADD_BLOG(state, blog) {
-    state.data.push(blog);
-  },
-  UPDATE_BLOG(state, blog) {
-    const index = state.data.findIndex((b) => b.id === blog.id);
-    if (index !== -1) {
-      state.data.splice(index, 1, blog);
-    }
-  },
-  DELETE_BLOG(state, id) {
-    state.data = state.data.filter((blog) => blog.id !== id);
+  createData(state, employment) {
+    state.data.push(employment);
   },
 };
 
 const actions = {
-  // async deleteBlog({ commit }, { id, onSuccess, onFailure }) {
-  //   await store.dispatch("setLoading", true);
-  //   try {
-  //     await axios.delete(`blog/${id}`);
-  //     commit("DELETE_BLOG", id);
-  //     onSuccess();
-  //   } catch (error) {
-  //     console.error("Error deleting blog:", error);
-  //     onFailure(error);
-  //   }
-  //   await store.dispatch("setLoading", false);
-  // },
   async fetchIndexData({ commit }) {
     try {
-      const response = await axios.get("employment");
+      const response = await axios.get("blog");
       const data = Object.values(response.data);
-      commit("SET_data", data);
+      commit("setData", data);
     } catch (error) {
       console.error("Error fetching index data:", error);
     }
   },
-  // async createBlog({ commit }, blogData) {
-  //   const response = await axios.post("blog", blogData);
-  //   const blog = response.data;
-  //   commit("ADD_BLOG", blog);
-  //   return blog;
-  // },
-  async updateBlog({ commit }, blogData) {
-    const response = await axios.put(`employment/${blogData.id}`, blogData);
-    const blog = response.data;
-    commit("UPDATE_BLOG", blog);
-    return blog;
+  async createData({ commit }, employmentData) {
+    await store.dispatch("loadingModule/setLoading", true);
+    try {
+      const response = await addData("employment", employmentData);
+      const data = response.data;
+      commit("createData", data);
+      return data;
+    } catch (error) {
+      console.error("Error creating employment:", error);
+      throw error;
+    } finally {
+      await store.dispatch("loadingModule/setLoading", false);
+    }
   },
 };
 

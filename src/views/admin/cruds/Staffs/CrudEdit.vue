@@ -94,7 +94,7 @@ import { mapGetters, mapActions } from "vuex";
 import { VueEditor } from "vue2-editor";
 
 import BackButton from "@/views/admin/components/BackButton.vue";
-import {submit} from "@/services/blog";
+import {submit} from "@/utils/methods";
 
 export default {
   components: { BackButton, VueEditor },

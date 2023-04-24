@@ -4,6 +4,7 @@ import Vuex from "vuex";
 //modules
 import mobile from "./modules/mobile";
 import loadingModule from "./modules/loading";
+import toast from "./modules/toast";
 // cruds
 import BlogsIndex from "./Admin/cruds/Blogs/index";
 import BlogsSingle from "./Admin/cruds/Blogs/single";
@@ -23,6 +24,7 @@ const store = new Vuex.Store({
   modules: {
     mobile,
     loadingModule,
+    toast,
     BlogsSingle,
     BlogsIndex,
     AdminAboutIndex,

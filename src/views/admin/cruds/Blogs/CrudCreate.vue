@@ -75,10 +75,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import { VueEditor } from "vue2-editor";
 
-import { submit } from "@/services/blog";
+import { addData } from "@/utils/methods";
 import BackButton from "@/views/admin/components/BackButton.vue";
 
 export default {
@@ -98,30 +98,17 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("BlogsSingle", [
-      "entry",
-      "lists",
-      "loading",
-      "validationErrors",
-    ]),
+    ...mapGetters("BlogsSingle", ["entry"]),
     imageUrl() {
       return this.post.file ? URL.createObjectURL(this.post.file) : null;
     },
   },
-  beforeDestroy() {
-    this.resetState();
-  },
   methods: {
-    ...mapActions("BlogsSingle", [
-      "storeData",
-      "fetchCreateData",
-      "resetState",
-    ]),
     onFileSelected(event) {
       this.post.file = event.target.files[0];
     },
     submitForm() {
-      submit(this.post);
+      addData("blogss", this.post);
     },
     focusField(name) {
       this.activeField = name;

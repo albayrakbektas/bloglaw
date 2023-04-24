@@ -3,6 +3,7 @@
     <SpinnerMain />
     <HeaderShortcuts />
     <HeaderComponent />
+    <VueToast />
     <router-view />
     <FooterMain />
   </div>
@@ -40,7 +41,6 @@ import SpinnerMain from "@/components/SpinnerMain.vue";
 </script>
 <script>
 import { mapGetters } from "vuex";
-
 export default {
   computed: {
     ...mapGetters("loadingModule", ["isLoading"]),

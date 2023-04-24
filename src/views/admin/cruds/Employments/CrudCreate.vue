@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 import { VueEditor } from "vue2-editor";
 
 import BackButton from "@/views/admin/components/BackButton.vue";
@@ -99,12 +98,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("BlogsSingle", [
-      "entry",
-      "lists",
-      "loading",
-      "validationErrors",
-    ]),
     imageUrl() {
       return this.employment.file ? URL.createObjectURL(this.employment.file) : null;
     },
@@ -113,11 +106,6 @@ export default {
     this.resetState();
   },
   methods: {
-    ...mapActions("BlogsSingle", [
-      "storeData",
-      "fetchCreateData",
-      "resetState",
-    ]),
     onFileSelected(event) {
       this.employment.file = event.target.files[0];
     },
