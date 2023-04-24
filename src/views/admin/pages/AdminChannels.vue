@@ -78,7 +78,7 @@ export default {
     },
     async getData() {
       try {
-        const response = await axios.get("http://localhost:3000/channels");
+        const response = await axios.get("channels");
         if (response.data) {
           this.channels = response.data[0]
         }
@@ -89,7 +89,7 @@ export default {
     async submit(blog) {
       const { phone, email, address } = blog;
       try {
-        const response = await axios.post("http://localhost:3000/channels", {
+        const response = await axios.post("channels", {
           phone,
           email,
           address,

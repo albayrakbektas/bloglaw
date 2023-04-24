@@ -31,7 +31,7 @@ const actions = {
   // async deleteBlog({ commit }, { id, onSuccess, onFailure }) {
   //   await store.dispatch("setLoading", true);
   //   try {
-  //     await axios.delete(`http://localhost:3000/blog/${id}`);
+  //     await axios.delete(`blog/${id}`);
   //     commit("DELETE_BLOG", id);
   //     onSuccess();
   //   } catch (error) {

@@ -30,7 +30,7 @@ export default {
   created() {
     // Fetch the data for all service cards using Axios
     axios
-        .get("http://localhost:3000/service")
+        .get("service")
         .then((response) => {
           this.services = response.data;
           this.isLoading = false;

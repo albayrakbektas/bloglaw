@@ -30,7 +30,7 @@ const mutations = {
 const actions = {
   async deleteabout({ commit }, { id, onSuccess, onFailure }) {
     try {
-      await axios.delete(`http://localhost:3000/about/${id}`);
+      await axios.delete(`about/${id}`);
       commit("DELETE_about", id);
       onSuccess();
     } catch (error) {
@@ -40,7 +40,7 @@ const actions = {
   },
   async fetchIndexData({ commit }) {
     try {
-      const response = await axios.get("http://localhost:3000/about");
+      const response = await axios.get("about");
       const data = response.data;
       commit("SET_data", data);
     } catch (error) {

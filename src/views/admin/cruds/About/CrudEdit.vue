@@ -151,7 +151,7 @@ export default {
 
       try {
         const response = await axios.post(
-          `http://localhost:3000/about/${this.entry.id}`,
+          `about/${this.entry.id}`,
           formData,
           {
             headers: {

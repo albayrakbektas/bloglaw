@@ -169,7 +169,7 @@ export default {
       formData.append("bg_file", service.bg_file);
       try {
         const response = await axios.post(
-          "http://localhost:3000/service",
+          "service",
           formData,
           {
             headers: {

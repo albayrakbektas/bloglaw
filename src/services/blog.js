@@ -10,7 +10,7 @@ export async function submit(blog) {
   formData.append("content", blog.content);
   formData.append("file", blog.file);
   try {
-    const response = await axios.post("http://localhost:3000/blog", formData, {
+    const response = await axios.post("blog", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

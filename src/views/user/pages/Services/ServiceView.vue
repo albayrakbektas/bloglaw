@@ -33,7 +33,7 @@ export default {
   created() {
     // Fetch the data for the selected service card using Axios
     axios
-      .get(`http://localhost:3000/service/${this.$route.params.id}`)
+      .get(`service/${this.$route.params.id}`)
       .then((response) => {
         this.service = response.data;
         this.isLoading = false;

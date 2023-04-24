@@ -14,7 +14,7 @@ export async function submit(about) {
   formData.append("content", about.content);
   formData.append("file", about.file);
   try {
-    const response = await axios.post("http://localhost:3000/about", formData, {
+    const response = await axios.post("about", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -28,7 +28,7 @@ export async function submit(about) {
 
 export async function deleteabout(id, onSuccess, onFailure) {
   try {
-    const response = await axios.delete(`http://localhost:3000/about/${id}`);
+    const response = await axios.delete(`about/${id}`);
     console.log("About deleted:", response.data);
     onSuccess();
   } catch (error) {

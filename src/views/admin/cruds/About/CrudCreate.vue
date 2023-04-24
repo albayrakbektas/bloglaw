@@ -141,7 +141,7 @@ export default {
       formData.append("file", blog.file);
       try {
         const response = await axios.post(
-          "http://localhost:3000/about",
+          "about",
           formData,
           {
             headers: {

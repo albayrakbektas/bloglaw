@@ -53,7 +53,7 @@ const actions = {
     });
   },
   fetchEditData({ commit }, id) {
-    axios.get(`http://localhost:3000/employment/${id}`).then((response) => {
+    axios.get(`employment/${id}`).then((response) => {
       commit("setEntry", response.data);
     });
   },

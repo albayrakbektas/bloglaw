@@ -149,7 +149,7 @@ export default {
 
       try {
         const response = await axios.put(
-          `http://localhost:3000/employment/${this.entry.id}`,
+          `employment/${this.entry.id}`,
           formData,
           {
             headers: {

@@ -123,7 +123,7 @@ export default {
   created() {
     // Fetch the data for the selected entry card using Axios
     axios
-      .get(`http://localhost:3000/channels`)
+      .get(`channels`)
       .then((response) => {
         this.entry = response.data[0];
         this.isLoading = false;
@@ -146,7 +146,7 @@ export default {
 
       try {
         const response = await axios.post(
-          "http://localhost:3000/send-email",
+          "send-email",
           formData
         );
 

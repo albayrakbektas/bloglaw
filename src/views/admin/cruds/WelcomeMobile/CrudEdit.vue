@@ -185,7 +185,7 @@ export default {
 
       try {
         const response = await axios.put(
-          `http://localhost:3000/service/${this.entry.id}`,
+          `service/${this.entry.id}`,
           formData,
           {
             headers: {

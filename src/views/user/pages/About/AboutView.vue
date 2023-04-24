@@ -37,7 +37,7 @@ export default {
   created() {
     // Fetch the data for the selected entry card using Axios
     axios
-        .get(`http://localhost:3000/about`)
+        .get(`about`)
         .then((response) => {
           this.entry = response.data[0];
           this.isLoading = false;

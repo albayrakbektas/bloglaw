@@ -31,7 +31,7 @@ const mutations = {
 const actions = {
   async deleteService({ commit }, { id, onSuccess, onFailure }) {
     try {
-      await axios.delete(`http://localhost:3000/service/${id}`);
+      await axios.delete(`service/${id}`);
       commit("DELETE_SERVICE", id);
       onSuccess();
     } catch (error) {

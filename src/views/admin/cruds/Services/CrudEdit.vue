@@ -185,7 +185,7 @@
 
 <!--&lt;!&ndash;      try {&ndash;&gt;-->
 <!--&lt;!&ndash;        const response = await axios.put(&ndash;&gt;-->
-<!--&lt;!&ndash;          `http://localhost:3000/service/${this.entry.id}`,&ndash;&gt;-->
+<!--&lt;!&ndash;          `service/${this.entry.id}`,&ndash;&gt;-->
 <!--&lt;!&ndash;          formData,&ndash;&gt;-->
 <!--&lt;!&ndash;          {&ndash;&gt;-->
 <!--&lt;!&ndash;            headers: {&ndash;&gt;-->
