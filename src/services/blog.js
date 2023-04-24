@@ -1,4 +1,3 @@
-import store from "@/store"; // Import the Vuex store instance
 import axios from "axios";
 import router from "@/router";
 

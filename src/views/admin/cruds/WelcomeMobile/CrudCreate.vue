@@ -103,7 +103,6 @@ import { mapGetters, mapActions } from "vuex";
 import { VueEditor } from "vue2-editor";
 
 import BackButton from "@/views/admin/components/BackButton.vue";
-import store from "@/store";
 import axios from "axios";
 import router from "@/router";
 export default {

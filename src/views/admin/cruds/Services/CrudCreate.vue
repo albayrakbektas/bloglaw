@@ -103,7 +103,6 @@ import { mapGetters, mapActions } from "vuex";
 import { VueEditor } from "vue2-editor";
 
 import BackButton from "@/views/admin/components/BackButton.vue";
-import store from "@/store";
 import axios from "axios";
 import router from "@/router";
 export default {
@@ -159,7 +158,6 @@ export default {
       this.submit(this.service);
     },
     async submit(service) {
-      await store.dispatch("setLoading", true);
       const formData = new FormData();
       formData.append("id", service.id);
       formData.append("title", service.title);
