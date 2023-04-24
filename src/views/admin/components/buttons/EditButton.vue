@@ -7,8 +7,11 @@
         name: xprops.route + '.' + crudType,
         params: { id: data ? data.id : '' },
       }"
-      class="btn btn-primary me-2"
-      :class="{ 'btn-warning': crudType === 'edit' }"
+      class="btn me-2"
+      :class="{
+        'btn-warning': crudType === 'edit',
+        'btn-primary': crudType !== 'edit',
+      }"
     >
       <i v-if="crudType === 'show'" class="bi bi-eye-fill"></i>
       <i v-if="crudType === 'edit'" class="bi bi-pencil-square"></i>

@@ -3,7 +3,6 @@ import axios from "axios";
 import router from "@/router";
 
 export async function submit(blog) {
-  await store.dispatch("setLoading", true);
   const formData = new FormData();
   formData.append("id", blog.id);
   formData.append("title", blog.title);
@@ -22,5 +21,4 @@ export async function submit(blog) {
   } catch (error) {
     console.error("Error uploading blog:", error);
   }
-  await store.dispatch("setLoading", false);
 }

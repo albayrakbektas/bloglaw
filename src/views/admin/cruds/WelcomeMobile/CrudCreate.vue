@@ -159,7 +159,7 @@ export default {
       this.submit(this.service);
     },
     async submit(service) {
-      await store.dispatch("setLoading", true);
+      // await store.dispatch("setLoading", true);
       const formData = new FormData();
       formData.append("id", service.id);
       formData.append("title", service.title);
@@ -183,7 +183,7 @@ export default {
       } catch (error) {
         console.error("Error uploading service:", error);
       }
-      await store.dispatch("setLoading", false);
+      // await store.dispatch("setLoading", false);
     },
     focusField(name) {
       this.activeField = name;

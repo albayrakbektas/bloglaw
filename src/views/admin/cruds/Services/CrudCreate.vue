@@ -183,7 +183,6 @@ export default {
       } catch (error) {
         console.error("Error uploading service:", error);
       }
-      await store.dispatch("setLoading", false);
     },
     focusField(name) {
       this.activeField = name;

@@ -43,7 +43,7 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["isLoading"]),
+    ...mapGetters("loadingModule", ["isLoading"]),
   },
   data() {
     return {};

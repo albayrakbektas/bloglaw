@@ -31,7 +31,6 @@ const mutations = {
 
 const actions = {
   async deleteService({ commit }, { id, onSuccess, onFailure }) {
-    await store.dispatch("setLoading", true);
     try {
       await axios.delete(`http://localhost:3000/service/${id}`);
       commit("DELETE_SERVICE", id);
@@ -40,18 +39,14 @@ const actions = {
       console.error("Error deleting service:", error);
       onFailure(error);
     }
-    await store.dispatch("setLoading", false);
   },
   async fetchIndexData({ commit }) {
     try {
-      await store.dispatch("setLoading", true);
       const response = await axios.get("service");
       const data = Object.values(response.data);
       commit("SET_data", data);
     } catch (error) {
       console.error("Error fetching index data:", error);
-    } finally {
-      await store.dispatch("setLoading", false);
     }
   },
   async createService({ commit }, serviceData) {

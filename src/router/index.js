@@ -128,6 +128,31 @@ const routes = [
         meta: { title: "cruds.blog.title" },
       },
       {
+        path: "carousels",
+        name: "carousels.index",
+        component: () => import("@/views/admin/cruds/Carousels/CrudIndex.vue"),
+        meta: { title: "cruds.carousel.title" },
+      },
+      {
+        path: "carousel/create",
+        name: "carousel.create",
+        component: () => import("@/views/admin/cruds/Carousels/CrudCreate.vue"),
+        meta: { title: "cruds.carousel.title" },
+      },
+      {
+        path: "carousel/:id",
+        name: "carousel.show",
+        component: () => import("@/views/admin/cruds/Carousels/CrudShow.vue"),
+        meta: { title: "cruds.carousel.title" },
+      },
+      {
+        path: "carousel/:id/edit",
+        name: "carousel.edit",
+        component: () => import("@/views/admin/cruds/Carousels/CrudEdit.vue"),
+        meta: { title: "cruds.carousel.title" },
+      },
+
+      {
         path: "about",
         name: "about.index",
         component: () => import("@/views/admin/cruds/About/CrudIndex.vue"),

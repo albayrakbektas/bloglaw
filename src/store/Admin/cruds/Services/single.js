@@ -7,7 +7,7 @@ function initialState() {
   };
 }
 
-const route = "services";
+const route = "service";
 
 const getters = {
   entry: (state) => state.entry,

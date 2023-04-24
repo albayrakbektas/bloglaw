@@ -30,7 +30,6 @@ const mutations = {
 
 const actions = {
   async deleteabout({ commit }, { id, onSuccess, onFailure }) {
-    await store.dispatch("setLoading", true);
     try {
       await axios.delete(`http://localhost:3000/about/${id}`);
       commit("DELETE_about", id);
@@ -39,18 +38,14 @@ const actions = {
       console.error("Error deleting about:", error);
       onFailure(error);
     }
-    await store.dispatch("setLoading", false);
   },
   async fetchIndexData({ commit }) {
     try {
-      await store.dispatch("setLoading", true);
       const response = await axios.get("http://localhost:3000/about");
       const data = response.data;
       commit("SET_data", data);
     } catch (error) {
       console.error("Error fetching index data:", error);
-    } finally {
-      await store.dispatch("setLoading", false);
     }
   },
   async createabout({ commit }, aboutData) {

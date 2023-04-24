@@ -3,7 +3,7 @@
     <div
       class="card-header card-header-primary d-flex justify-content-between align-items-center px-3 sticky-top"
     >
-      <HeaderIndex title="Services" :xprops="xprops" :is-crud="true" />
+      <HeaderIndex title="Bloglar" :xprops="xprops" :is-crud="true" />
     </div>
     <div class="card-body">
       <div v-if="data.length" class="row">
@@ -14,7 +14,7 @@
         >
           <div class="card-wrapper">
             <BlogCardAdmin
-              @delete-handler="removeService(item)"
+              @delete-handler="removeBlog(item)"
               :data="item"
               :xprops="xprops"
             />
@@ -32,25 +32,25 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import HeaderIndex from "@/views/admin/components/header/HeaderIndex.vue";
-import GoToTopButton from "@/components/GoToTopButton.vue";
 import BlogCardAdmin from "@/views/admin/components/cards/BlogCardAdmin.vue";
+import GoToTopButton from "@/components/GoToTopButton.vue";
 
 export default {
-  components: {BlogCardAdmin, GoToTopButton, HeaderIndex },
+  components: { GoToTopButton, BlogCardAdmin, HeaderIndex },
   data() {
     return {
       columns: [],
-      services: null,
+      blogs: null,
       query: { sort: "id", order: "desc", limit: 25, s: "" },
       xprops: {
-        module: "ServicesIndex",
-        route: "service",
-        permission_prefix: "service_",
+        module: "BlogsIndex",
+        route: "blog",
+        permission_prefix: "blog_",
       },
     };
   },
   computed: {
-    ...mapGetters("AdminServicesIndex", ["data", "loading"]),
+    ...mapGetters("BlogsIndex", ["data", "loading"]),
   },
   watch: {
     query: {
@@ -62,8 +62,8 @@ export default {
     },
   },
   methods: {
-    ...mapActions("AdminServicesIndex", ["fetchIndexData"]),
-    removeService(item) {
+    ...mapActions("BlogsIndex", ["fetchIndexData"]),
+    removeBlog(item) {
       const { id } = item;
 
       const onSuccess = () => {
@@ -75,11 +75,7 @@ export default {
         // Handle the error, e.g., show a notification to the user
       };
 
-      this.$store.dispatch("AdminServicesIndex/deleteService", {
-        id,
-        onSuccess,
-        onFailure,
-      });
+      this.$store.dispatch("BlogsIndex/deleteData", { id, onSuccess, onFailure });
     },
   },
 };

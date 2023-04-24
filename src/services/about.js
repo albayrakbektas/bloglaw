@@ -8,7 +8,6 @@ import axios from "axios";
 import router from "@/router";
 
 export async function submit(about) {
-  await store.dispatch("setLoading", true);
   const formData = new FormData();
   formData.append("id", about.id);
   formData.append("title", about.title);
@@ -27,11 +26,9 @@ export async function submit(about) {
   } catch (error) {
     console.error("Error uploading about:", error);
   }
-  await store.dispatch("setLoading", false);
 }
 
 export async function deleteabout(id, onSuccess, onFailure) {
-  await store.dispatch("setLoading", true);
   try {
     const response = await axios.delete(`http://localhost:3000/about/${id}`);
     console.log("About deleted:", response.data);
@@ -40,7 +37,6 @@ export async function deleteabout(id, onSuccess, onFailure) {
     console.error("Error deleting about:", error);
     onFailure(error);
   }
-  await store.dispatch("setLoading", false);
 }
 
 export function writePostData(about) {

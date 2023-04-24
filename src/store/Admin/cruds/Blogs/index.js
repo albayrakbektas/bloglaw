@@ -43,14 +43,11 @@ const actions = {
   },
   async fetchIndexData({ commit }) {
     try {
-      await store.dispatch("setLoading", true);
       const response = await axios.get("blog");
       const data = Object.values(response.data);
       commit("setData", data);
     } catch (error) {
       console.error("Error fetching index data:", error);
-    } finally {
-      await store.dispatch("setLoading", false);
     }
   },
   async createData({ commit }, blogData) {

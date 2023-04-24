@@ -126,7 +126,6 @@ export default {
       this.submit(this.employment);
     },
     async submit(blog) {
-      await store.dispatch("setLoading", true);
       const formData = new FormData();
       formData.append("id", blog.id);
       formData.append("title", blog.title);
@@ -149,7 +148,6 @@ export default {
       } catch (error) {
         console.error("Error uploading blog:", error);
       }
-      await store.dispatch("setLoading", false);
     },
     focusField(name) {
       this.activeField = name;

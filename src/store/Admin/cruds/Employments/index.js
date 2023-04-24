@@ -1,5 +1,4 @@
 import axios from "axios";
-import store from "@/store";
 
 const state = {
   data: [],
@@ -43,14 +42,11 @@ const actions = {
   // },
   async fetchIndexData({ commit }) {
     try {
-      await store.dispatch("setLoading", true);
       const response = await axios.get("employment");
       const data = Object.values(response.data);
       commit("SET_data", data);
     } catch (error) {
       console.error("Error fetching index data:", error);
-    } finally {
-      await store.dispatch("setLoading", false);
     }
   },
   // async createBlog({ commit }, blogData) {
