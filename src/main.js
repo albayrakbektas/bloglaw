@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "font-awesome/css/font-awesome.css";
+import { inject } from "@vercel/analytics";
+inject();
 
 import Toasted from "vue-toasted";
 import * as VueGoogleMaps from "vue2-google-maps";

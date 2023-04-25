@@ -22,7 +22,7 @@ const mutations = {
 const actions = {
   async fetchIndexData({ commit }) {
     try {
-      const response = await axios.get("blog");
+      const response = await axios.get("employment");
       const data = Object.values(response.data);
       commit("setData", data);
     } catch (error) {
