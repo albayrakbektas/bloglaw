@@ -27,20 +27,20 @@ export default {
   data() {
     return {
       service: {},
-      isLoading: true,
     };
   },
   created() {
-    // Fetch the data for the selected service card using Axios
+    this.$store.dispatch("landing/setLoading", true);
     axios
       .get(`service/${this.$route.params.id}`)
       .then((response) => {
         this.service = response.data;
-        this.isLoading = false;
       })
       .catch((error) => {
         console.error(error);
-        this.isLoading = false;
+      })
+      .finally(() => {
+        this.$store.dispatch("landing/setLoading", false);
       });
   },
 };

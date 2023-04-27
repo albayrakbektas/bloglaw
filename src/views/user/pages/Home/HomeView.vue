@@ -25,42 +25,18 @@ import BrandView from "@/views/user/pages/Home/components/BrandView.vue";
 
 export default {
   name: "HomeView",
-  components: {BrandView, GoogleMap, ServiceCards, EmploymentCards, KeyWords, OfficeCard, SlickCarousel, BlogCards },
+  components: {
+    BrandView,
+    GoogleMap,
+    ServiceCards,
+    EmploymentCards,
+    KeyWords,
+    OfficeCard,
+    SlickCarousel,
+    BlogCards,
+  },
   data() {
-    return {
-      swiperOptions: {
-        speed: 600,
-        parallax: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      },
-      slides: [
-        {
-          title: "Slide 1",
-          subtitle: "Subtitle",
-          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.",
-          bgImage: "https://picsum.photos/1200/800",
-        },
-        {
-          title: "Slide 2",
-          subtitle: "Subtitle",
-          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.",
-          bgImage: "https://picsum.photos/1200/800",
-        },
-        {
-          title: "Slide 3",
-          subtitle: "Subtitle",
-          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.",
-          bgImage: "https://picsum.photos/1200/800",
-        },
-      ],
-    };
+    return {};
   },
 };
 </script>

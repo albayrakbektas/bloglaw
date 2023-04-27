@@ -32,14 +32,18 @@ export default {
   },
   methods: {
     fetchBlogData() {
+      this.$store.dispatch("landing/setLoading", true);
       const id = this.$route.params.id;
       axios
-        .get(`/blog/${id}`)
+        .get(`blog/${id}`)
         .then((response) => {
           this.blogData = response.data;
         })
         .catch((error) => {
           console.error(error);
+        })
+        .finally(() => {
+          this.$store.dispatch("landing/setLoading", false);
         });
     },
   },

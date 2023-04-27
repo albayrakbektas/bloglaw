@@ -27,18 +27,21 @@ export default {
       isLoading: true,
     };
   },
+  methods: {},
   created() {
+    this.$store.dispatch("landing/setLoading", true);
     // Fetch the data for all service cards using Axios
     axios
-        .get("service")
-        .then((response) => {
-          this.services = response.data;
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          console.error(error);
-          this.isLoading = false;
-        });
+      .get("service")
+      .then((response) => {
+        this.services = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        this.$store.dispatch("landing/setLoading", false);
+      });
   },
 };
 </script>
@@ -52,9 +55,10 @@ export default {
 .sec-title .sub-title.primary {
   color: #8d6e63;
 }
-.sec-title .top-line:before, .sec-title .top-line:after {
+.sec-title .top-line:before,
+.sec-title .top-line:after {
   position: absolute;
-  content: '';
+  content: "";
   top: 50%;
   left: -80px;
   transform: translateY(-50%);

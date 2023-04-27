@@ -225,6 +225,32 @@
           Iletisim
         </router-link>
       </li>
+      <li>
+        <router-link
+            to="/admin/profile"
+            class="nav-link text-white"
+            active-class="active"
+            exact
+        >
+          <svg class="bi pe-none me-2" width="16" height="16">
+            <use xlink:href="#people-circle"></use>
+          </svg>
+          Profil
+        </router-link>
+      </li>
+      <li>
+        <router-link
+            to="/admin/settings"
+            class="nav-link text-white"
+            active-class="active"
+            exact
+        >
+          <svg class="bi pe-none me-2" width="16" height="16">
+            <use xlink:href="#people-circle"></use>
+          </svg>
+          Ayarlar
+        </router-link>
+      </li>
     </ul>
     <hr />
     <div class="dropdown">
@@ -241,7 +267,7 @@
             height="32"
             class="rounded-circle me-2"
         />
-        <strong>mdo</strong>
+        <strong>Bektas Albayrak</strong>
       </router-link>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
         <li id="bottom-link" @click.stop="logout">

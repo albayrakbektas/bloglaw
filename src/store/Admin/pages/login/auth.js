@@ -31,6 +31,18 @@ const actions = {
         console.error("Error logging out: ", error);
       });
   },
+  // setPassword() {
+  //   const user = auth.currentUser;
+  //   const newPassword = getASecureRandomPassword();
+  //   updatePassword(user, newPassword)
+  //     .then(() => {
+  //       // Update successful.
+  //     })
+  //     .catch((error) => {
+  //       // An error ocurred
+  //       // ...
+  //     });
+  // },
   checkAuth({ commit }) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {

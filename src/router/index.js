@@ -171,6 +171,25 @@ const routes = [
         meta: { title: "cruds.about.title" },
       },
       {
+        path: "slider",
+        name: "slider.create",
+        component: () => import("@/views/admin/cruds/Slider/CrudCreate.vue"),
+        meta: { title: "cruds.slider.title" },
+      },
+      {
+        path: "profile",
+        name: "profile.create",
+        component: () => import("@/views/admin/cruds/Profile/CrudCreate.vue"),
+        meta: { title: "cruds.admin.title" },
+      },
+      {
+        path: "settings",
+        name: "settings",
+        component: () =>
+          import("@/views/admin/pages/Settings/AdminSettings.vue"),
+        meta: { title: "cruds.admin.title" },
+      },
+      {
         path: "staff",
         name: "staff.index",
         component: () => import("@/views/admin/cruds/Staffs/CrudIndex.vue"),

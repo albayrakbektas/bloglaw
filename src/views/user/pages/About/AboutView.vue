@@ -20,32 +20,33 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 import axios from "axios";
 
 export default {
   name: "AboutView",
   computed: {
-    ...mapGetters(["isMobile"])
+    ...mapGetters(["isMobile"]),
   },
   data() {
     return {
       entry: {},
-      isLoading: true,
     };
   },
   created() {
+    this.$store.dispatch("landing/setLoading", true);
     // Fetch the data for the selected entry card using Axios
     axios
-        .get(`about`)
-        .then((response) => {
-          this.entry = response.data[0];
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          console.error(error);
-          this.isLoading = false;
-        });
+      .get(`about`)
+      .then((response) => {
+        this.entry = response.data[0];
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        this.$store.dispatch("landing/setLoading", false);
+      });
   },
 };
 </script>

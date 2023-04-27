@@ -16,7 +16,7 @@ import axios from "axios";
 import BlogCard from "@/views/user/pages/Home/components/BlogCard.vue";
 export default {
   name: "BlogView",
-  components: {BlogCard},
+  components: { BlogCard },
   data() {
     return {
       blogData: {},
@@ -27,13 +27,17 @@ export default {
   },
   methods: {
     fetchBlogData() {
+      this.$store.dispatch("landing/setLoading", true);
       axios
-        .get(`/blog`)
+        .get(`blog`)
         .then((response) => {
           this.blogData = response.data;
         })
         .catch((error) => {
           console.error(error);
+        })
+        .finally(() => {
+          this.$store.dispatch("landing/setLoading", false);
         });
     },
   },

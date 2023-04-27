@@ -3,11 +3,33 @@
     <div
       class="card-header card-header-primary d-flex justify-content-between align-items-center px-3"
     >
-      <h4 class="card-title m-0">Yeni Blog</h4>
+      <h4 class="card-title m-0">Profile</h4>
       <BackButton />
     </div>
     <div class="card-body">
       <form @submit.prevent="submitForm">
+        <div class="mb-3">
+          <label for="title-input" class="form-label">Isim</label>
+          <input
+              v-model="post.name"
+              type="text"
+              class="form-control"
+              id="title-input"
+              placeholder="Baslik giriniz.."
+              required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="title-input" class="form-label">Soyisim</label>
+          <input
+              v-model="post.surname"
+              type="text"
+              class="form-control"
+              id="title-input"
+              placeholder="Baslik giriniz.."
+              required
+          />
+        </div>
         <div class="mb-3">
           <label for="title-input" class="form-label">Baslik</label>
           <input
@@ -55,11 +77,25 @@
                 class="upload-input position-absolute start-0 top-0 w-100 h-100"
               />
               <img
-                v-if="post.file"
-                class="img-preview position-absolute top-0 h-100"
-                :src="imageUrl"
-                alt="asd"
+                  v-if="imageUrl"
+                  class="img-preview position-absolute top-0 h-100"
+                  :src="imageUrl"
+                  alt="asd"
               />
+              <div>
+                <div
+                    v-if="imageUrl"
+                    class="position-absolute bottom-0 start-50 translate-middle-x"
+                >
+                  <button
+                      @click="removeFile"
+                      type="button"
+                      class="btn btn-danger"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="title">
               <h4>Drop file to upload</h4>
@@ -75,41 +111,61 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import { VueEditor } from "vue2-editor";
 
-import { addData } from "@/utils/methods";
 import BackButton from "@/views/admin/components/BackButton.vue";
+import {mapActions} from "vuex";
 
 export default {
   components: { BackButton, VueEditor },
   data() {
     return {
       post: {
+        name: "",
+        surname: "",
         title: "",
         subtitle: "",
         description: "",
         content: "",
         file: "",
       },
+      isRemoved: false,
       selectedFile: null,
+      previewSrc: "",
       status: "",
       activeField: "",
     };
   },
   computed: {
-    ...mapGetters("BlogsSingle", ["entry"]),
     imageUrl() {
-      return this.post.file ? URL.createObjectURL(this.post.file) : null;
+      return this.previewSrc ? this.previewSrc : this.post.file;
     },
   },
+  created() {
+    this.fetchProfile();
+  },
   methods: {
+    ...mapActions("AdminProfileIndex", ["addProfile", "getProfile"]),
+
+    async fetchProfile() {
+      const profile = await this.getProfile();
+      if (profile !== "create") {
+        this.post = { ...profile };
+      }
+    },
     onFileSelected(event) {
       this.post.file = event.target.files[0];
+      this.previewSrc = URL.createObjectURL(event.target.files[0]);
+      this.isRemoved = false;
     },
-    submitForm() {
-      addData("blogs", this.post);
+    removeFile() {
+      this.post.file = null;
+      this.isRemoved = true;
     },
+    async submitForm() {
+      await this.addProfile(this.post) // update code here
+    },
+
     focusField(name) {
       this.activeField = name;
     },

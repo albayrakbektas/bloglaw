@@ -6,7 +6,7 @@
     </div>
     <div>
       <div class="row align-items-stretch mb-2">
-        <div class="col-md-6">
+        <div class="col-md-6 d-none d-md-block">
           <GoogleMap />
         </div>
         <div class="col-md-6">
@@ -80,19 +80,10 @@
             </form>
           </div>
         </div>
+        <div class="col-md-6 d-block d-md-none">
+          <GoogleMap />
+        </div>
       </div>
-      <!--      <div class="row  py-3 px-md-5 py-md-5">-->
-      <!--        <div class="col-12 col-md-4">-->
-      <!--          <img :src="entry.file" class="img-fluid w-100 h-100" alt="..." />-->
-      <!--        </div>-->
-      <!--        <div class="col-12 col-md-8 pt-5 pt-md-0 pe-md-5">-->
-      <!--          <h5 class="h1 text-center text-md-start">{{ entry.title }}</h5>-->
-      <!--          <p class="h4 text-center text-md-start">{{ entry.subtitle }}</p>-->
-      <!--          <p class="pe-md-5" style="font-size: 1.1rem; line-height: 2rem">-->
-      <!--            {{ entry.content }}-->
-      <!--          </p>-->
-      <!--        </div>-->
-      <!--      </div>-->
     </div>
   </div>
 </template>
@@ -121,16 +112,18 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch("landing/setLoading", true);
     // Fetch the data for the selected entry card using Axios
     axios
       .get(`channels`)
       .then((response) => {
         this.entry = response.data[0];
-        this.isLoading = false;
       })
       .catch((error) => {
         console.error(error);
-        this.isLoading = false;
+      })
+      .finally(() => {
+        this.$store.dispatch("landing/setLoading", false);
       });
   },
   methods: {
@@ -145,22 +138,19 @@ export default {
       };
 
       try {
-        const response = await axios.post(
-          "send-email",
-          formData
-        );
+        const response = await axios.post("send-email", formData);
 
         if (response.data.success) {
-         alert("if1")
-          console.log(response.data)
+          alert("if1");
+          console.log(response.data);
         } else {
-          alert("if2")
-          console.log(response.data)
+          alert("if2");
+          console.log(response.data);
           // Show error message or do something else
         }
       } catch (error) {
-        alert("if3")
-        console.log(error)
+        alert("if3");
+        console.log(error);
         // Show error message or do something else
       }
     },
