@@ -12,9 +12,10 @@ const mutations = {
 };
 
 const actions = {
-  async updatePassword({ commit }, { oldPassword, newPassword }) {
+  async updatePassword({ commit }, { uid, oldPassword, newPassword }) {
     try {
       await axios.put("/settings/password", {
+        uid,
         oldPassword,
         newPassword,
       });

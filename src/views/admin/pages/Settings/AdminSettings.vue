@@ -25,7 +25,7 @@
                 class="form-control"
                 id="old-password-input"
                 placeholder="Eski şifrenizi giriniz.."
-                required
+
               />
             </div>
             <div class="mb-3">
@@ -38,7 +38,7 @@
                 class="form-control"
                 id="new-password-input"
                 placeholder="Yeni şifrenizi giriniz.."
-                required
+
                 @click="clearErrorMessage"
               />
               <div
@@ -58,7 +58,7 @@
                 class="form-control"
                 id="confirm-password-input"
                 placeholder="Yeni şifrenizi tekrar giriniz.."
-                required
+
                 @click="clearErrorMessage"
               />
             </div>
@@ -79,6 +79,7 @@
 import BackButton from "@/views/admin/components/BackButton.vue";
 import { mapActions } from "vuex";
 import store from "@/store";
+import {auth} from "@/services/firebase";
 
 export default {
   components: { BackButton },
@@ -109,7 +110,9 @@ export default {
       }
 
       try {
+        const uid = auth.currentUser.uid
         await store.dispatch("Settings/updatePassword", {
+          uid,
           oldPassword: this.oldPassword,
           newPassword: this.newPassword,
         });

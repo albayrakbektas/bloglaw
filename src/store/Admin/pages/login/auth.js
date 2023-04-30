@@ -58,30 +58,49 @@ const actions = {
   },
 };
 
-export const login = async function (email, password) {
-  return signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      if (user) {
-        router.replace({ path: "/admin/" });
-      }
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      throw error;
-    });
-};
-// export const logout = async function () {
-//   signOut(auth)
-//     .then(() => {
-//       router.replace({ path: "/login" });
+// export const login = async function (email, password) {
+//   return signInWithEmailAndPassword(auth, email, password)
+//     .then((userCredential) => {
+//       const user = userCredential.user;
+//       if (user) {
+//         router.replace({ path: "/admin/" });
+//       }
 //     })
 //     .catch((error) => {
-//       console.log(error);
+//       throw error;
 //     });
 // };
+
+export const login = async function (email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+    if (user) {
+      await router.replace({ path: "/admin/" });
+    }
+  } catch (error) {
+    let errorMessage;
+    switch (error.code) {
+      case "auth/user-not-found":
+        errorMessage = "email hatali";
+        break;
+      case "auth/wrong-password":
+        errorMessage = "sifre hatali";
+        break;
+      case "auth/too-many-requests":
+        errorMessage =
+          "Birçok başarısız giriş denemesi nedeniyle bu hesaba erişim geçici olarak devre dışı bırakıldı. Parolanızı sıfırlayarak hemen geri yükleyebilir veya daha sonra tekrar deneyebilirsiniz.";
+        break;
+      default:
+        errorMessage = error.message;
+    }
+    throw new Error(errorMessage);
+  }
+};
 
 export default {
   namespaced: true,
