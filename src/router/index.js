@@ -183,6 +183,12 @@ const routes = [
         meta: { title: "cruds.admin.title" },
       },
       {
+        path: "office",
+        name: "office.create",
+        component: () => import("@/views/admin/cruds/Office/CrudCreate.vue"),
+        meta: { title: "cruds.office.title" },
+      },
+      {
         path: "settings",
         name: "settings",
         component: () =>

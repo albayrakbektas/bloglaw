@@ -17,6 +17,8 @@ import AdminEmploymentsIndex from "./Admin/cruds/Employments/index";
 import AdminEmploymentsSingle from "./Admin/cruds/Employments/single";
 import AdminProfileIndex from "./Admin/cruds/Profile/index";
 import AdminProfileSingle from "./Admin/cruds/Profile/single";
+import AdminOfficeIndex from "./Admin/cruds/Office/index";
+import AdminOfficeSingle from "./Admin/cruds/Office/single";
 
 //pages
 import Auth from "./Admin/pages/login/auth";
@@ -40,6 +42,8 @@ const store = new Vuex.Store({
     AdminEmploymentsSingle,
     AdminProfileIndex,
     AdminProfileSingle,
+    AdminOfficeIndex,
+    AdminOfficeSingle,
     Settings,
     Auth,
   },

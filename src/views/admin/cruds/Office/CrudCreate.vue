@@ -3,7 +3,7 @@
     <div
       class="card-header card-header-primary d-flex justify-content-between align-items-center px-3"
     >
-      <h4 class="card-title m-0">Profile</h4>
+      <h4 class="card-title m-0">Office</h4>
       <BackButton />
     </div>
     <div class="card-body">
@@ -142,15 +142,15 @@ export default {
     },
   },
   created() {
-    this.fetchProfile();
+    this.fetchOffice();
   },
   methods: {
-    ...mapActions("AdminProfileIndex", ["addProfile", "getProfile"]),
+    ...mapActions("AdminOfficeIndex", ["addOffice", "getOffice"]),
 
-    async fetchProfile() {
-      const profile = await this.getProfile();
-      if (profile !== "create") {
-        this.post = { ...profile };
+    async fetchOffice() {
+      const office = await this.getOffice();
+      if (office !== "create") {
+        this.post = { ...office };
       }
     },
     onFileSelected(event) {
@@ -163,7 +163,7 @@ export default {
       this.isRemoved = true;
     },
     async submitForm() {
-      await this.addProfile(this.post); // update code here
+      await this.addOffice(this.post); // update code here
     },
 
     focusField(name) {

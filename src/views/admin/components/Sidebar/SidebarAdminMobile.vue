@@ -2,7 +2,7 @@
   <div
     class="d-flex flex-column flex-shrink-0 bg-body-tertiary position-fixed top-0 start-0 h-100"
     style="width: 4.5rem; border: 1px solid #000000"
-    v-if="isMobile"
+    v-if="4 < 1"
   >
     <a
       href="#"
