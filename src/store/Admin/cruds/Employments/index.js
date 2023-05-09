@@ -17,17 +17,31 @@ const mutations = {
   createData(state, employment) {
     state.data.push(employment);
   },
+  deleteData(state, id) {
+    state.data = state.data.filter((employment) => employment.id !== id);
+  },
 };
 
 const actions = {
   async fetchIndexData({ commit }) {
     try {
-      const response = await axios.get("employment");
+      const response = await axios.get("employments");
       const data = Object.values(response.data);
       commit("setData", data);
     } catch (error) {
       console.error("Error fetching index data:", error);
     }
+  },
+  async deleteData({ commit }, { id, onSuccess, onFailure }) {
+    try {
+      await axios.delete(`/employments/${id}`);
+      commit("deleteData", id);
+      onSuccess();
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+      onFailure(error);
+    }
+    await store.dispatch("loadingModule/setLoading", false);
   },
   async createData({ commit }, employmentData) {
     await store.dispatch("loadingModule/setLoading", true);

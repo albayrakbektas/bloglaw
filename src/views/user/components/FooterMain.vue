@@ -1,14 +1,18 @@
 <template>
-  <footer v-if="!isAdmin && !isLogin" class="bg-dark text-light">
+  <footer
+    v-if="!isAdmin && !isLogin"
+    class="bg-dark text-light"
+    style="border-top: 1px solid #b1976b !important"
+  >
     <div class="container py-4">
       <div class="row">
         <div class="col-md-3 text-center">
           <img
-            src="https://picsum.photos/120/100"
+            src="/brand_logo_converted_dup.png"
             alt="Office Brand Logo"
-            class="img-fluid"
+            class="img-fluid w-25 mb-3"
           />
-          <h4>lorem ipsum</h4>
+          <h4 style="color: rgb(177, 151, 107)">lorem ipsum</h4>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Dignissimos dolore eos ipsam! Deleniti dicta doloremque ea explicabo
@@ -17,7 +21,7 @@
           </p>
         </div>
         <div class="col-md-3">
-          <h4>Links</h4>
+          <h4 style="color: rgb(177, 151, 107)">Links</h4>
           <ul class="list-unstyled">
             <li class="btn beko mb-2">
               <router-link to="/" class="nav-link">Anasayfa</router-link>
@@ -43,7 +47,7 @@
           </ul>
         </div>
         <div class="col-md-3">
-          <h4>Contact</h4>
+          <h4 style="color: rgb(177, 151, 107)">Contact</h4>
           <ul class="list-unstyled">
             <li class="btn beko mb-2">
               <i class="bi bi-telephone"></i>
@@ -82,7 +86,7 @@
           </ul>
         </div>
         <div class="col-md-3">
-          <h4>Makaleler</h4>
+          <h4 style="color: rgb(177, 151, 107)">Makaleler</h4>
           <ul class="list-unstyled" style="display: inline-grid">
             <li
               class="btn beko mb-2"
@@ -97,10 +101,10 @@
         </div>
       </div>
     </div>
-    <div class="bg-secondary py-3">
+    <div class="bg-dark py-1">
       <div class="container">
-        <p class="m-0 text-center text-white">
-          &copy; {{ currentYear }} Company Name. All rights reserved.
+        <p class="m-0 text-center" style="color: #b1976b">
+          &copy; {{ currentYear }} Albayrak Hukuk. All rights reserved.
         </p>
       </div>
     </div>

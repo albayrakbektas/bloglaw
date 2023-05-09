@@ -1,9 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-dark">
-    <button class="navbar-toggler" type="button" style="outline: none; border: none" @click="isOpen = !isOpen">
+    <button
+      class="navbar-toggler"
+      type="button"
+      style="outline: none; border: none"
+      @click="isOpen = !isOpen"
+    >
       <i class="bi bi-list text-white h1"></i>
     </button>
-
     <div class="navbar-collapse bg-dark" :class="{ show: isOpen }">
       <button
         v-if="isOpen"
@@ -43,8 +47,7 @@
           </router-link>
         </li>
       </ul>
-      <!-- image here -->
-      <img class="img-fluid mt-5" src="https://picsum.photos/100"  alt=""/>
+      <img class="img-fluid mt-5" src="https://picsum.photos/100" alt="" />
     </div>
   </nav>
 </template>
@@ -92,11 +95,10 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 5rem 2rem 0;
-    /* justify-content: center; */
     width: fit-content;
-    max-width: 300px;
+    height: 100vh;
     background-color: #fff;
-    transform: translateX(100%);
+    transform: translate(110%, -100%);
     transition: transform 0.3s ease-in-out;
   }
 
@@ -131,7 +133,6 @@ li {
 }
 span {
   border-bottom: 1px solid #fff;
-
 }
 a {
   width: 100%;

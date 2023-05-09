@@ -1,20 +1,18 @@
 <template>
-  <div class="container my-5">
-    <div class="sec-title text-center pb-1 mb-3">
+  <div class="py-5">
+    <div class="sec-title text-center pb-1 mb-3 mt-5">
       <h2 class="title">Mersin Hukuk</h2>
       <h4 class="sub-title top-line primary">Uzmanlik Alanimiz</h4>
     </div>
     <div class="row py-3 px-md-5 py-md-5">
-      <div class="col-12 col-md-4">
-        <img :src="blogData.file" class="img-fluid w-100 h-100" alt="..." />
-      </div>
-      <div class="col-12 col-md-8 pt-5 pt-md-0 pe-md-5">
-        <h5 class="h1 text-center text-md-start">{{ blogData.title }}</h5>
-        <p class="h4 text-center text-md-start">{{ blogData.subtitle }}</p>
+      <div class="container text-center col-12 pt-5 pt-md-0 pe-md-5">
+        <h5 class="h1 text-center">{{ blogData.title }}</h5>
+        <p class="h4 text-center">{{ blogData.subtitle }}</p>
         <p class="pe-md-5" style="font-size: 1.1rem; line-height: 2rem">
           {{ blogData.content }}
         </p>
       </div>
+      <img class="img-fluid" :src="imageUrl" alt="" />
     </div>
   </div>
 </template>
@@ -29,6 +27,25 @@ export default {
   },
   created() {
     this.fetchBlogData();
+  },
+  computed: {
+    imageUrl() {
+      if (!this.blogData.file) {
+        return "";
+      }
+      // Check if data.file is a URL (string) or a buffer object
+      if (typeof this.blogData.file === "string") {
+        return this.blogData.file;
+      } else {
+        let binary = "";
+        const bytes = new Uint8Array(this.blogData.file.buffer.data);
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64 = btoa(binary);
+        return `data:${this.blogData.file.mimetype};base64,${base64}`;
+      }
+    },
   },
   methods: {
     fetchBlogData() {
@@ -51,7 +68,7 @@ export default {
 </script>
 <style scoped>
 img {
-  height: 15rem;
+  max-height: 25rem;
 }
 .sec-title .top-line {
   position: relative;

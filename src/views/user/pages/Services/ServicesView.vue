@@ -1,8 +1,8 @@
 <template>
-  <div class="container my-5">
-    <div class="sec-title text-center pb-1 mb-3">
+  <div class="container py-5">
+    <div class="sec-title text-center pb-1 mb-3 mt-5">
+      <h2 class="title text-white">Hizmetlerimiz</h2>
       <h4 class="sub-title top-line primary">Uzmanlik Alanlarimiz</h4>
-      <h2 class="title">Hizmetlerimiz</h2>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <div v-for="service in services" :key="service.id" class="col mb-3">

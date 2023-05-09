@@ -1,13 +1,13 @@
 <template>
   <div
-    class="container-fluid w-100 h-100 position-relative map-container"
-    :class="{'in-home': $route.path === '/'}"
+    class="w-100 h-100 position-relative map-container"
+    :class="{ 'in-home': $route.path === '/' }"
   >
     <GmapMap
       :center="center"
       :zoom="zoom"
       map-type-id="terrain"
-      style="width: 100%; height: 100%"
+      style="width: 100%; height: 100%; opacity: 0.8"
       ref="gmap"
       @load="onMapLoaded"
     >

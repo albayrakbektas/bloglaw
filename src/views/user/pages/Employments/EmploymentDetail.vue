@@ -1,6 +1,6 @@
 <template>
-  <div class="container my-5">
-    <div class="sec-title text-center pb-1 mb-3">
+  <div class="container py-5">
+    <div class="sec-title text-center pb-1 mb-3 mt-5">
       <h2 class="title">Mersin Hukuk</h2>
       <h4 class="sub-title top-line primary">Is Alanimiz</h4>
     </div>
@@ -53,13 +53,13 @@ export default {
     fetchBlogData() {
       const id = this.$route.params.id;
       axios
-          .get(`/employment/${id}`)
-          .then((response) => {
-            this.card = response.data;
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        .get(`/employments/${id}`)
+        .then((response) => {
+          this.card = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
   },
 };

@@ -1,9 +1,8 @@
 <template>
   <div id="app" :class="{ 'none-event': isLoading }">
+    <HeaderComponent />
     <SpinnerMain />
     <LandingPage />
-    <HeaderShortcuts />
-    <HeaderComponent />
     <VueToast />
     <ContactView />
     <router-view />
@@ -13,13 +12,15 @@
 
 <style lang="scss">
 :root {
-  background: black;
+  background-color: rgba(33, 37, 41, 1);
 }
 body {
   font-family: "Georgia", serif !important;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  background-color: rgba(33, 37, 41, 1);
 }
 body::-webkit-scrollbar {
   width: 10px; /* width of the scrollbar */
@@ -42,6 +43,7 @@ body::-webkit-scrollbar-track {
   font-family: Georgia, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgba(33, 37, 41, 1);
 }
 .section {
   padding: 2.5rem 0;
@@ -58,7 +60,6 @@ body.spinner-active {
 </style>
 <script setup>
 import HeaderComponent from "@/views/user/components/HeaderComponent.vue";
-import HeaderShortcuts from "@/views/user/components/HeaderShortcuts.vue";
 import FooterMain from "@/views/user/components/FooterMain.vue";
 import SpinnerMain from "@/components/SpinnerMain.vue";
 import ContactView from "@/components/ContactDirectly.vue";
@@ -69,9 +70,12 @@ import { mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters("loadingModule", ["isLoading"]),
+    ...mapGetters(["isScroll"]),
   },
   data() {
-    return {};
+    return {
+      lastScrollPosition: 0,
+    };
   },
   beforeCreate() {
     this.$store.dispatch("landing/setLoading", true);
@@ -98,7 +102,14 @@ export default {
       this.$store.commit("setIsMobile", window.innerWidth < 768);
     },
     handleScrollStart() {
+      this.$store.commit("setIsScroll", true);
       document.body.classList.add("scroll");
+      const currentScrollPosition =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const isScrollingDown = currentScrollPosition > this.prevScrollPosition;
+      this.prevScrollPosition = currentScrollPosition;
+
+      this.$store.commit("setIsScrollDown", isScrollingDown);
     },
 
     handleScrollEnd() {

@@ -16,7 +16,7 @@
             <BlogCardAdmin
               :data="emp"
               :xprops="xprops"
-              :has-delete="false"
+              @delete-handler="removeEmployment(emp)"
             />
           </div>
         </div>
@@ -36,7 +36,7 @@ import GoToTopButton from "@/components/GoToTopButton.vue";
 import BlogCardAdmin from "@/views/admin/components/cards/BlogCardAdmin.vue";
 
 export default {
-  components: {BlogCardAdmin, GoToTopButton, HeaderIndex },
+  components: { BlogCardAdmin, GoToTopButton, HeaderIndex },
   data() {
     return {
       columns: [],
@@ -63,24 +63,24 @@ export default {
   },
   methods: {
     ...mapActions("AdminEmploymentsIndex", ["fetchIndexData"]),
-    // removeEmployment(emp) {
-    //   const { id } = emp;
-    //
-    //   const onSuccess = () => {
-    //     // No need to update the UI here, Vuex will handle it
-    //   };
-    //
-    //   const onFailure = (error) => {
-    //     console.log(error);
-    //     // Handle the error, e.g., show a notification to the user
-    //   };
-    //
-    //   this.$store.dispatch("AdminEmploymentsIndex/deleteBlog", {
-    //     id,
-    //     onSuccess,
-    //     onFailure,
-    //   });
-    // },
+    removeEmployment(emp) {
+      const { id } = emp;
+
+      const onSuccess = () => {
+        // No need to update the UI here, Vuex will handle it
+      };
+
+      const onFailure = (error) => {
+        console.log(error);
+        // Handle the error, e.g., show a notification to the user
+      };
+
+      this.$store.dispatch("AdminEmploymentsIndex/deleteData", {
+        id,
+        onSuccess,
+        onFailure,
+      });
+    },
   },
 };
 </script>

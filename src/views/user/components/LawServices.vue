@@ -3,35 +3,40 @@
     :to="'/hizmetlerimiz/' + card.id"
     class="text-decoration-none col-md-3 mb-3"
   >
-    <div class="">
-      <div
-        class="h-100 py-4 pe-4 ps-3 text-white bg-dark rounded-3 position-relative has-bg"
-      >
-        <img
-          class="position-absolute img-fluid h-100 w-100 start-0 top-0"
-          style="opacity: 0.2; z-index: 99; object-fit: cover"
-          :src="bgImgUrl"
-          alt="asd"
-        />
+    <div class="card bg-transparent">
+      <div class="card-body p-0 custom-router rounded-2">
         <div
-          class="position-relative mb-3"
-          style="height: calc(1.375rem + 1.5vw); width: calc(1.375rem + 1.5vw)"
+          class="h-100 py-4 pe-4 ps-3 text-white bg-dark rounded-3 position-relative has-bg"
         >
           <img
-            class="position-absolute start-0 top-0"
+            class="position-absolute img-fluid h-100 w-100 start-0 top-0"
+            style="opacity: 0.2; z-index: 99; object-fit: cover"
+            :src="bgImgUrl"
+            alt="asd"
+          />
+          <div
+            class="position-relative mb-3"
             style="
-              opacity: 1;
               height: calc(1.375rem + 1.5vw);
               width: calc(1.375rem + 1.5vw);
             "
-            :src="imageUrl"
-            alt="asd"
-          />
+          >
+            <img
+              class="position-absolute start-0 top-0"
+              style="
+                opacity: 1;
+                height: calc(1.375rem + 1.5vw);
+                width: calc(1.375rem + 1.5vw);
+              "
+              :src="imageUrl"
+              alt="asd"
+            />
+          </div>
+          <h2>{{ card.title }}</h2>
+          <p>
+            {{ card.content }}
+          </p>
         </div>
-        <h2>{{ card.title }}</h2>
-        <p>
-          {{ card.content }}
-        </p>
       </div>
     </div>
   </router-link>
@@ -93,7 +98,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 p {
   overflow: hidden;
   display: -webkit-box;
@@ -104,5 +109,12 @@ p {
   background-size: 5rem;
   background-repeat: no-repeat;
   background-position: center;
+}
+.custom-router {
+  transition: 0.2s ease-in-out;
+  border: 1px solid rgba(177, 151, 107, 0.6);
+  &:hover {
+    border: 1px solid rgba(177, 151, 107, 1);
+  }
 }
 </style>

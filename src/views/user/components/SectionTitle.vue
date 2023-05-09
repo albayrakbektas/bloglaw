@@ -1,7 +1,7 @@
 <template>
-  <div class="sec-title text-center pb-1 mb-3">
+  <div class="sec-title text-center pb-1 mb-3 mt-5">
     <h4 class="sub-title top-line primary">{{ data.title }}</h4>
-    <h2 class="title">{{data.subtitle}}</h2>
+    <h2 class="title">{{ data.subtitle }}</h2>
   </div>
 </template>
 
@@ -11,10 +11,10 @@ export default {
   props: {
     data: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -26,9 +26,10 @@ export default {
 .sec-title .sub-title.primary {
   color: #8d6e63;
 }
-.sec-title .top-line:before, .sec-title .top-line:after {
+.sec-title .top-line:before,
+.sec-title .top-line:after {
   position: absolute;
-  content: '';
+  content: "";
   top: 50%;
   left: -80px;
   transform: translateY(-50%);

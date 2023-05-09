@@ -1,20 +1,26 @@
 <template>
-  <div class="row align-items-md-stretch section">
-    <div class="sec-title text-center pb-1 mb-3">
+  <div class="align-items-md-stretch pt-0 section container">
+    <div class="sec-title text-center pb-1 mb-3 mt-5">
       <h4 class="sub-title top-line primary">Uzmanlik Alanlarimiz</h4>
-      <h2 class="title">Bektasin KALEMİNDEN</h2>
+      <h2 class="title text-white">Bektasin KALEMİNDEN</h2>
     </div>
-   <LawServices v-for="(card, index) of data" :key="card.title + index" :card="card" />
+    <div class="row">
+      <LawServices
+        v-for="(card, index) of data"
+        :key="card.title + index"
+        :card="card"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import LawServices from "@/views/user/components/LawServices.vue";
-import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "ServiceCards",
-  components: {LawServices},
+  components: { LawServices },
   computed: {
     ...mapGetters("AdminServicesIndex", ["data", "loading"]),
   },
@@ -30,7 +36,7 @@ export default {
   methods: {
     ...mapActions("AdminServicesIndex", ["fetchIndexData"]),
   },
-}
+};
 </script>
 
 <style scoped>

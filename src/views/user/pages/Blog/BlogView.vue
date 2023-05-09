@@ -1,7 +1,7 @@
 <template>
-  <div class="container my-5">
-    <div class="sec-title text-center pb-1 mb-3">
-      <h2 class="title">Mersin Hukuk</h2>
+  <div class="container py-5">
+    <div class="sec-title text-center pb-1 mb-3 mt-5">
+      <h2 class="title text-white">Mersin Hukuk</h2>
       <h4 class="sub-title top-line primary">Hukuki Makaleler</h4>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">

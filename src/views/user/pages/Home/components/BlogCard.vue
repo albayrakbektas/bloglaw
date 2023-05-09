@@ -1,16 +1,23 @@
 <template>
-  <router-link :to="'/hukuki-makaleler/' + data.id" class="card mb-3 mb-md-0 mb-lg-0">
-    <img :src="data.file" class="card-img-top img-fluid" alt="..." />
-    <div class="card-body text-center">
-      <h5 class="card-title">{{ data.title }}</h5>
-      <p class="card-subtitle">{{ data.subtitle }}</p>
-      <p class="card-text">{{ data.content }}</p>
-      <div class="d-inline-block align-middle btn beko">
-        <router-link :to="'/hukuki-makaleler/' + data.id">Makale Devami</router-link>
-        <i class="bi bi-arrow-right"></i>
+  <div class="card-container">
+    <router-link
+      :to="'/hukuki-makaleler/' + data.id"
+      class="card mb-3 mb-md-0 mb-lg-0"
+    >
+      <img :src="imageUrl" class="card-img-top img-fluid" alt="..." />
+      <div class="card-body text-center">
+        <h4 class="card-title">{{ data.title }}</h4>
+        <p class="card-subtitle">{{ data.subtitle }}</p>
+        <p class="card-text">{{ data.content }}</p>
+        <div class="d-inline-block align-middle btn beko">
+          <router-link :to="'/hukuki-makaleler/' + data.id"
+            >Makale Devami</router-link
+          >
+          <i class="bi bi-arrow-right"></i>
+        </div>
       </div>
-    </div>
-  </router-link>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -21,6 +28,25 @@ export default {
     data: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    imageUrl() {
+      if (!this.data.file) {
+        return "";
+      }
+      // Check if data.file is a URL (string) or a buffer object
+      if (typeof this.data.file === "string") {
+        return this.data.file;
+      } else {
+        let binary = "";
+        const bytes = new Uint8Array(this.data.file.buffer.data);
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64 = btoa(binary);
+        return `data:${this.data.file.mimetype};base64,${base64}`;
+      }
     },
   },
   methods: {},
@@ -107,14 +133,22 @@ img {
     }
   }
 }
+img {
+  border-radius: 1rem 0;
+  transition: 0.4s ease-in-out;
+}
 .card {
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
   &:hover {
+    color: #ffffff;
+    img {
+      border-radius: 0 1rem;
+    }
     .btn:after {
       width: 100%;
     }
   }
-}
-.card-title, .card-body {
-  border: none !important;
 }
 </style>

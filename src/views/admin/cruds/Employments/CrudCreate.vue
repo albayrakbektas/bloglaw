@@ -3,7 +3,7 @@
     <div
       class="card-header card-header-primary d-flex justify-content-between align-items-center px-3"
     >
-      <h4 class="card-title m-0">Yeni Blog</h4>
+      <h4 class="card-title m-0">Yeni Is Alani</h4>
       <BackButton />
     </div>
     <div class="card-body">
@@ -99,7 +99,9 @@ export default {
   },
   computed: {
     imageUrl() {
-      return this.employment.file ? URL.createObjectURL(this.employment.file) : null;
+      return this.employment.file
+        ? URL.createObjectURL(this.employment.file)
+        : null;
     },
   },
   beforeDestroy() {
@@ -121,15 +123,11 @@ export default {
       formData.append("content", blog.content);
       formData.append("file", blog.file);
       try {
-        const response = await axios.post(
-          "employments",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        const response = await axios.post("employment", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         console.log("Blog saved:", response.data);
         await router.replace({ path: "/admin/employment" });
       } catch (error) {

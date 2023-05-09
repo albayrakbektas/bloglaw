@@ -1,12 +1,16 @@
 <template>
-  <div class="container my-5">
-    <div class="sec-title text-center pb-1 mb-3">
+  <div class="container py-5">
+    <div class="sec-title text-center pb-1 mb-3 mt-5">
       <h2 class="title">Mersin Hukuk</h2>
       <h4 class="sub-title top-line primary">Is Alanlarimiz</h4>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div v-for="service in blogData" :key="service.id" class="col col-md-4 mb-3">
-        <EmploymentCard :data="service"  :card="service"/>
+      <div
+        v-for="service in blogData"
+        :key="service.id"
+        class="col col-md-4 mb-3"
+      >
+        <EmploymentCard :data="service" :card="service" />
       </div>
     </div>
   </div>
@@ -16,7 +20,7 @@ import axios from "axios";
 import EmploymentCard from "@/views/user/pages/Employments/components/EmploymentCard.vue";
 export default {
   name: "EmploymentView",
-  components: {EmploymentCard},
+  components: { EmploymentCard },
   data() {
     return {
       blogData: {},
@@ -28,13 +32,13 @@ export default {
   methods: {
     fetchBlogData() {
       axios
-          .get(`/employment`)
-          .then((response) => {
-            this.blogData = response.data;
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        .get(`/employments`)
+        .then((response) => {
+          this.blogData = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
   },
 };
