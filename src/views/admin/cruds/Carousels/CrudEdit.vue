@@ -153,7 +153,7 @@ export default {
       formData.append("title", this.entry.title);
       formData.append("subtitle", this.entry.subtitle);
       formData.append("description", this.entry.description);
-      formData.append("content", this.entry.content.replace(/<\/?p>/g, ""));
+      formData.append("content", this.entry.content);
 
       if (this.selectedFile) {
         formData.append("file", this.selectedFile);

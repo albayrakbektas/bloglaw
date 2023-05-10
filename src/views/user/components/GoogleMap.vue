@@ -97,6 +97,5 @@ export default {
 }
 .in-home {
   height: 25rem !important;
-  padding-bottom: 2.5rem !important;
 }
 </style>

@@ -143,24 +143,18 @@ export default {
       formData.append("title", this.entry.title);
       formData.append("subtitle", this.entry.subtitle);
       formData.append("description", this.entry.description);
-      formData.append("content", this.entry.content.replace(/<\/?p>/g, ""));
+      formData.append("content", this.entry.content);
 
       if (this.selectedFile) {
         formData.append("file", this.selectedFile);
       }
 
       try {
-        const response = await axios.post(
-          `about/${this.entry.id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        const updatedBlog = response.data;
-        await this.$store.dispatch("AdminAboutIndex/updateabout", updatedBlog);
+        await axios.post(`about/0`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         await this.$router.push("/admin/about");
       } catch (error) {
         console.error("Error updating blog:", error);

@@ -21,7 +21,7 @@
         />
         <div class="col-9" style="padding: 0 1.5rem 0 1rem">
           <h2 style="z-index: 5">{{ formattedTitle }}</h2>
-          <p style="z-index: 5">
+          <p v-html="card.content" style="z-index: 5">
             {{ card.content }}
           </p>
         </div>

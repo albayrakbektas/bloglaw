@@ -33,9 +33,9 @@
             />
           </div>
           <h2>{{ card.title }}</h2>
-          <p>
+          <div class="card-content" v-html="card.content">
             {{ card.content }}
-          </p>
+          </div>
         </div>
       </div>
     </div>
@@ -99,11 +99,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-p {
-  overflow: hidden;
+.card-content {
+  overflow: hidden !important;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  pre {
+    overflow: auto !important;
+  }
 }
 .has-bg {
   background-size: 5rem;
@@ -116,5 +119,8 @@ p {
   &:hover {
     border: 1px solid rgba(177, 151, 107, 1);
   }
+}
+pre {
+  overflow: hidden !important;
 }
 </style>

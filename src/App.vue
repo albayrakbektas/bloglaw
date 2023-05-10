@@ -57,6 +57,12 @@ body::-webkit-scrollbar-track {
 body.spinner-active {
   overflow: hidden;
 }
+.admin-page #app {
+  background-color: #fff;
+}
+pre {
+  overflow: hidden !important;
+}
 </style>
 <script setup>
 import HeaderComponent from "@/views/user/components/HeaderComponent.vue";
@@ -66,7 +72,7 @@ import ContactView from "@/components/ContactDirectly.vue";
 import LandingPage from "@/components/LandingPage.vue";
 </script>
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   computed: {
     ...mapGetters("loadingModule", ["isLoading"]),
@@ -80,7 +86,13 @@ export default {
   beforeCreate() {
     this.$store.dispatch("landing/setLoading", true);
   },
+  watch: {
+    $route() {
+      this.isAdminBackground();
+    },
+  },
   created() {
+    this.setOffice();
     setTimeout(() => {
       this.$store.dispatch("landing/setLoading", false);
     }, 1000);
@@ -98,8 +110,16 @@ export default {
     window.removeEventListener("resize", this.onResize);
   },
   methods: {
+    ...mapActions("office", ["setOffice"]),
     onResize() {
       this.$store.commit("setIsMobile", window.innerWidth < 768);
+    },
+    isAdminBackground() {
+      if (window.location.href.includes("admin")) {
+        document.body.classList.add("admin-page");
+      } else {
+        document.body.classList.remove("admin-page");
+      }
     },
     handleScrollStart() {
       this.$store.commit("setIsScroll", true);

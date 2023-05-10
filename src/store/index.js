@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 //modules
 import mobile from "./modules/mobile";
+import office from "./modules/office";
 import scroll from "./modules/scroll";
 import loadingModule from "./modules/loading";
 import toast from "./modules/toast";
@@ -30,6 +31,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   modules: {
     mobile,
+    office,
     scroll,
     loadingModule,
     landing,

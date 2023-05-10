@@ -26,7 +26,7 @@
       >
         <img
           style="height: 70px"
-          src="/brand_logo_converted_dup.png"
+          :src="office.file"
           class="rounded-5 position-absolute start-0 top-0 bottom-0"
           alt="brand-logo"
         />
@@ -86,6 +86,7 @@ export default {
   },
   computed: {
     ...mapGetters(["isMobile", "isScroll", "isScrollDown"]),
+    ...mapGetters("office", ["office"]),
     isAdmin() {
       return this.$route.path && this.$route.path.includes("admin");
     },

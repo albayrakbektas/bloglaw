@@ -11,7 +11,7 @@
     <!--    />-->
     <div class="section container position-relative" style="z-index: 2">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="container col-lg-6">
           <div class="">
             <h4>Mersin Avukat</h4>
             <h2>Bektas Albayrak</h2>

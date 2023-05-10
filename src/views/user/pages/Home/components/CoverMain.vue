@@ -39,7 +39,7 @@
             <h1>{{ slider.title }}</h1>
             <h2>{{ slider.subtitle }}</h2>
             <h3>{{ slider.description }}</h3>
-            <p>{{ slider.content }}</p>
+            <p v-html="slider.content">{{ slider.content }}</p>
             <div class="mt-5">
               <router-link
                 class="py-3 px-5 h5 mt-5 bg-dark rounded-5 border"

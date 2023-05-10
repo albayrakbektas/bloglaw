@@ -11,8 +11,12 @@
       <div class="col-12 col-md-8 pt-5 pt-md-0 pe-md-5">
         <h5 class="h1 text-center text-md-start">{{ service.title }}</h5>
         <p class="h4 text-center text-md-start">{{ service.subtitle }}</p>
-        <p class="pe-md-5" style="font-size: 1.1rem; line-height: 2rem">
-          {{ service.content.replace(/<\/?p>/g, "") }}
+        <p
+          v-html="service.content"
+          class="pe-md-5"
+          style="font-size: 1.1rem; line-height: 2rem"
+        >
+          {{ service.content }}
         </p>
       </div>
     </div>
@@ -69,5 +73,10 @@ export default {
 .sec-title .top-line:before {
   left: auto;
   right: -80px;
+}
+h2,
+h5,
+p {
+  color: #ffffff;
 }
 </style>

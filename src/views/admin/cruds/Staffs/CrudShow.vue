@@ -17,7 +17,7 @@
             {{ entry.subtitle }}
           </h3>
           <h5 v-if="entry.description" class="">{{ entry.description }}</h5>
-          <p class="card-text">{{ entry.content.replace(/<\/?p>/g, "") }}</p>
+          <p v-html="entry.content" class="card-text">{{ entry.content }}</p>
         </div>
       </div>
     </div>

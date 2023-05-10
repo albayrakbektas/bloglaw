@@ -4,7 +4,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ data.title }}</h5>
       <p class="card-subtitle">{{ data.subtitle }}</p>
-      <p class="card-text">{{ data.content }}</p>
+      <p v-html="data.content" class="card-text">{{ data.content }}</p>
       <div class="d-flex justify-content-end align-items-center"></div>
     </div>
   </div>

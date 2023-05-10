@@ -172,7 +172,7 @@ export default {
       const formData = new FormData();
       formData.append("title", this.entry.title);
       formData.append("description", this.entry.description);
-      formData.append("content", this.entry.content.replace(/<\/?p>/g, ""));
+      formData.append("content", this.entry.content);
       formData.append("price", this.entry.price);
 
       if (this.selectedImage) {
@@ -184,15 +184,11 @@ export default {
       }
 
       try {
-        const response = await axios.put(
-          `service/${this.entry.id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        const response = await axios.put(`service/${this.entry.id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         const updatedService = response.data;
         await this.$store.dispatch(
           "ServicesIndex/updateService",

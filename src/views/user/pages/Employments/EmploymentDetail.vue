@@ -11,8 +11,12 @@
       <div class="col-12 col-md-8 pt-5 pt-md-0 pe-md-5">
         <h5 class="h1 text-center text-md-start">{{ card.title }}</h5>
         <p class="h4 text-center text-md-start">{{ card.subtitle }}</p>
-        <p class="pe-md-5" style="font-size: 1.1rem; line-height: 2rem">
-          {{ card.content.replace(/<\/?p>/g, "") }}
+        <p
+          v-html="card.content"
+          class="pe-md-5"
+          style="font-size: 1.1rem; line-height: 2rem"
+        >
+          {{ card.content }}
         </p>
       </div>
     </div>

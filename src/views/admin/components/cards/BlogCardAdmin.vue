@@ -4,7 +4,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ data.title }}</h5>
       <p class="card-subtitle">{{ data.subtitle }}</p>
-      <p class="card-text">{{ data.content }}</p>
+      <div v-html="data.content" class="card-text">{{ data.content }}</div>
       <div class="d-flex justify-content-end align-items-center">
         <EditButton
           :xprops="xprops"
@@ -139,7 +139,7 @@ export default {
         return "";
       }
       // Check if data.file is a URL (string) or a buffer object
-      if (typeof this.data.file === 'string') {
+      if (typeof this.data.file === "string") {
         return this.data.file;
       } else {
         let binary = "";

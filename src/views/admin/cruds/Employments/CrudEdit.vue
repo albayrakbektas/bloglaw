@@ -141,7 +141,7 @@ export default {
       formData.append("title", this.entry.title);
       formData.append("subtitle", this.entry.subtitle);
       formData.append("description", this.entry.description);
-      formData.append("content", this.entry.content.replace(/<\/?p>/g, ""));
+      formData.append("content", this.entry.content);
 
       if (this.selectedFile) {
         formData.append("file", this.selectedFile);
@@ -158,7 +158,10 @@ export default {
           }
         );
         const updatedBlog = response.data;
-        await this.$store.dispatch("AdminEmploymentsIndex/updateBlog", updatedBlog);
+        await this.$store.dispatch(
+          "AdminEmploymentsIndex/updateBlog",
+          updatedBlog
+        );
         await this.$router.push("/admin/employments");
       } catch (error) {
         console.error("Error updating blog:", error);

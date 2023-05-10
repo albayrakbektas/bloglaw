@@ -8,7 +8,7 @@
       <div class="card-body text-center">
         <h4 class="card-title">{{ data.title }}</h4>
         <p class="card-subtitle">{{ data.subtitle }}</p>
-        <p class="card-text">{{ data.content }}</p>
+        <p v-html="data.content" class="card-text">{{ data.content }}</p>
         <div class="d-inline-block align-middle btn beko">
           <router-link :to="'/hukuki-makaleler/' + data.id"
             >Makale Devami</router-link

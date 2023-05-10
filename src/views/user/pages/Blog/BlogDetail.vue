@@ -8,7 +8,11 @@
       <div class="container text-center col-12 pt-5 pt-md-0 pe-md-5">
         <h5 class="h1 text-center">{{ blogData.title }}</h5>
         <p class="h4 text-center">{{ blogData.subtitle }}</p>
-        <p class="pe-md-5" style="font-size: 1.1rem; line-height: 2rem">
+        <p
+          v-html="blogData.content"
+          class="pe-md-5"
+          style="font-size: 1.1rem; line-height: 2rem"
+        >
           {{ blogData.content }}
         </p>
       </div>
@@ -92,5 +96,10 @@ img {
 .sec-title .top-line:before {
   left: auto;
   right: -80px;
+}
+h2,
+h5,
+p {
+  color: #ffffff;
 }
 </style>

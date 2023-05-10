@@ -15,12 +15,13 @@
         <p class="h4 text-white text-center text-md-start">
           {{ entry.subtitle }}
         </p>
-        <p
+        <div
           class="pe-md-5 text-white"
           style="font-size: 1.1rem; line-height: 2rem"
+          v-html="entry.content"
         >
           {{ entry.content }}
-        </p>
+        </div>
       </div>
     </div>
   </div>

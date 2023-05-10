@@ -12,12 +12,23 @@
             alt="Office Brand Logo"
             class="img-fluid w-25 mb-3"
           />
-          <h4 style="color: rgb(177, 151, 107)">lorem ipsum</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Dignissimos dolore eos ipsam! Deleniti dicta doloremque ea explicabo
-            fugiat iure magnam minus mollitia nam nulla obcaecati recusandae,
-            repellat soluta sunt, voluptates?
+        </div>
+        <div class="col-md-9 text-center align-self-center">
+          <h1
+            style="
+              color: rgb(182, 149, 94);
+              font-weight: bolder;
+              font-style: italic;
+            "
+          >
+            {{ office.name }}
+          </h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <p v-html="office.content">
+            {{ office.content }}
           </p>
         </div>
         <div class="col-md-3">
@@ -113,6 +124,7 @@
 
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
 
 export default {
   name: "FooterMain",
@@ -124,6 +136,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("office", ["office"]),
     firstThreeElements() {
       return this.blogs.slice(0, 3);
     },
