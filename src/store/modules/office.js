@@ -20,7 +20,6 @@ const actions = {
       .get(`/office`)
       .then((response) => {
         commit("setOffice", response.data);
-        console.log(state.office);
       })
       .catch((error) => {
         console.error(error);
