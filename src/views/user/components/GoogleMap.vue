@@ -30,9 +30,11 @@ export default {
   name: "GoogleMap",
   data() {
     return {
-      center: { lat: 36.781541328049265, lng: 34.59453826932008 },
+      center: { lat: 36.77246839328151, lng: 34.570966069320086 },
       zoom: 15,
-      markers: [{ position: { lat: 36.8008333, lng: 34.6153113 } }],
+      markers: [
+        { position: { lat: 36.77246839328151, lng: 34.570966069320086 } },
+      ],
       mapLoaded: false,
     };
   },

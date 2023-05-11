@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-md-3 text-center">
           <img
-            src="/brand_logo_converted_dup.png"
+            :src="office.file"
             alt="Office Brand Logo"
             class="img-fluid w-25 mb-3"
           />
@@ -115,7 +115,7 @@
     <div class="bg-dark py-1">
       <div class="container">
         <p class="m-0 text-center" style="color: #b1976b">
-          &copy; {{ currentYear }} Albayrak Hukuk. All rights reserved.
+          &copy; {{ currentYear }} {{ office.name }}. All rights reserved.
         </p>
       </div>
     </div>
